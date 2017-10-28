@@ -1,6 +1,11 @@
 package system;
 
-public class PCB {
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class PCB implements Runnable{ // Each process is represented by a PCB
     /*
     * 3.1.3 Process Control Block: it is linked to a process as it is in the queue
         * Each process is represented in the operating system by a
@@ -23,13 +28,68 @@ public class PCB {
                 * account numbers
                 * Process numbers
             * I/O status info: list of I/O devices allocated to the process, a list of open files
-        *
+        *Each PCB includes a pointer field that points to the next PCB in the ready queue.
+            *
     * */
 
     /*The above fields will be the attributes of this class*/
 
-    int static final pid;// process identifier
-    ProcessState currentState;
-    int timeSlice//CPU Scheduling info, amt of time given for the process is paused
-    // and other information
+    private final int pid;// process identifier
+    private int arrivalTime;
+//    private ProcessState currentState;
+    private int timeSlice;//CPU Scheduling info, amt of time given for the
+                    // process is paused for RR schedueling
+    private byte processPriority; // priority 0 to 127, must be positive
+    private JobQueue<Integer> arr;
+    ScheduledExecutorService runIt;
+    int timeReq = 10;
+    int k;
+
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    public PCB(){
+        this(0,1);
+    }
+
+    public PCB(int pid, int k){
+        this.pid = pid;
+        arr = new JobQueue<Integer>();
+        this.k = k;
+    }
+
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+    private void count(){
+        for(int i=0;i<10;i++){
+            arr.add((i+1)*k);
+            sleep();
+        }
+    }
+
+    public void sleep(){
+        try {
+            Thread.sleep(300L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        print();
+    }
+
+    private void print(){
+        System.out.println(arr);
+    }
+
+    @Override
+    public void run() {
+        count();
+    }
+
+    /*private void timeThread() {
+        System.out.println("Class thread called.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + this.getAccountNumber());
+        this.runIt = Executors.newSingleThreadScheduledExecutor();
+        this.runIt.scheduleAtFixedRate(this, 0, 300, TimeUnit.MILLISECONDS); // checks
+        // every 5
+        // seconds
+    }*/
 }

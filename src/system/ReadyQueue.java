@@ -8,4 +8,5 @@ public class ReadyQueue {
     // A ready-queue header contains pointers to the first
     // and final PCB s in the list. Each PCB includes a pointer field
     // that points to the next PCB in the ready queue.
+    // IT IS A DOUBLY LINKED LIST OF PCBs
 }
