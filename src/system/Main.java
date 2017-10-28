@@ -20,11 +20,22 @@ public class Main{
     public static void main(String[] args) {
         ArrayList<PCB> t = Main.create();
         Iterator<PCB> it = t.iterator();
-        CPU.getInstance();
+//        CPU.getInstance();
 //        CPU.setCurrent(t);
-//        while (it.hasNext()){
-//            it.next().run();
-//        }
+        int i = 0;
+        while (it.hasNext()){
+            i++;
+            PCB p = it.next();
+            p.run();
+            if(CPU.time()%2 == 0){
+
+                /*try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+            }
+        }
         System.out.println("Ending here!");
     }
 }

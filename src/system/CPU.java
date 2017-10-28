@@ -50,5 +50,11 @@ public class CPU implements  Runnable{
         // seconds
     }
 
+    static long time() {
+        long timeMillis = System.currentTimeMillis();
+        long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+        return timeSeconds;
+    }
+
 
 }
