@@ -34,6 +34,7 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
 
     /*The above fields will be the attributes of this class*/
 
+<<<<<<< HEAD
     private final int pid;// process identifier
     private int arrivalTime;
 //    private ProcessState currentState;
@@ -92,4 +93,24 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
         // every 5
         // seconds
     }*/
+=======
+    static int  pid;                // Process identifier
+    int arivalTimel;                // Time when process p first makes request for execution from CPU scheduler
+    /**
+    ProcessState currentState;
+     */
+    /**
+     * Suggestion: we could represent the state as an int;
+     *          0 for New, 1 for Ready, 2 for Running, and 3 for Waiting.
+     */
+    int processState;               // The state of the process. 0 for New, 1 for Ready, 2 for Running, and 3 for Waiting
+    int timeSlice;                  // CPU Scheduling info, amt of time given for the process is paused and other information
+    int processPriority;            // Non-negative integer representing the priority of the process. lower number = higher priority
+    int CPUTime;                    // Non-negative integer representing time needed for process to execute on CPU
+    int IOTime;                     // Non-negative integer representing time needed for I/O operation
+    int completionTime;             // Time when the process has completed
+    int turnAroundTime;             // Total time taken by process between starting state and ending state
+    int waitingTime;                // Time for which process is in the ready queue, no yet executing
+    PCB nextProcess;                // Reference to the next process in the queue. AKA program counter
+>>>>>>> 7c99b55c71cb3db0b1408f4c066a4552714ae71c
 }

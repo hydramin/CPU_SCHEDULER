@@ -21,7 +21,7 @@ public class Main{
         ArrayList<PCB> t = Main.create();
         Iterator<PCB> it = t.iterator();
         CPU.getInstance();
-        CPU.setCurrent(t);
+//        CPU.setCurrent(t);
 //        while (it.hasNext()){
 //            it.next().run();
 //        }
