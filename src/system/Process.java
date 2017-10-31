@@ -10,11 +10,12 @@ public class Process{
     private boolean run;
     public char c;
     private int numOfprint;
+    private final int maxPrint = 15;
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public Process(char a, int k){
-        arrivalTime = k;
+    public Process(char a){
+        arrivalTime = 0;
         cpuBurst = 0;
         ioBurst = 0;
         processPriority = 0;
@@ -58,6 +59,13 @@ public class Process{
         return numOfprint;
     }
 
+    /**
+     * @return the maxPrint
+     */
+    public int getMaxPrint() {
+        return maxPrint;
+    }
+
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
@@ -94,10 +102,16 @@ public class Process{
 
     public void count(){
         for(int i=0;i<3;i++){            
-            print(i);
+            print();
             upNumOfPrint();
             sleep();
         }
+    }
+
+    public void run(){
+        print();
+        upNumOfPrint();
+        sleep();
     }
 
     public void sleep(){
@@ -108,12 +122,7 @@ public class Process{
         }
     }
 
-    private void print(int a){
+    private void print(){
         System.out.printf("%c ",c);
-    }
-    
-    @Override
-    public String toString() {
-        return String.format("%c",this.c);
     }
 }

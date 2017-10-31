@@ -17,12 +17,6 @@ public class FCFS implements Runnable{
         // timeThread();
     }
 
-    // void timeThread() {
-	// 	System.out.println("Class thread called.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
-	// 	this.thread = Executors.newSingleThreadExecutor(this);
-	// 	// this.pay.scheduleAtFixedRate(this, 0, 1, TimeUnit.SECONDS); 
-    // }
-    
     public LinkedBlockingQueue<Process> getList(){
         return this.list;
     }
@@ -42,14 +36,14 @@ public class FCFS implements Runnable{
         while(true){
             if(list.size()!=0){
                 p = list.poll();
-                p.count();
-                // list.offer(p);           
-                // System.out.println("");
+                for(int i=0;i<p.getMaxPrint();i++){                    
+                    p.run();                                        
+                 }                                           
+                System.out.println("");
             }else{
                 // System.exit(0);
                 break;                
             }
-            
 
             try{
             Thread.sleep(500L);
