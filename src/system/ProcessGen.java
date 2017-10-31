@@ -26,7 +26,10 @@ public class ProcessGen implements Runnable{
     public void processEnqueu(){
         // System.out.println("<><><><>ENQUEUE<><><><>");
         p = new Process('U');  
-        queue.offer(p);    
+        if(!queue.isEmpty())
+            queue.offer(p);    
+        else    
+            this.pay.shutdown();
     }
 
     @Override
