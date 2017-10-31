@@ -34,11 +34,7 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
 
     /*The above fields will be the attributes of this class*/
     static int  pid;                // Process identifier
-    int arivalTimel;                // Time when process p first makes request for execution from CPU scheduler
-    /**
-     * Suggestion: we could represent the state as an int;
-     *          0 for New, 1 for Ready, 2 for Running, and 3 for Waiting.
-     */
+    int arivalTimel;                // Time when process p first makes request for execution from CPU scheduler   
     int processState;               // The state of the process. 0 for New, 1 for Ready, 2 for Running, and 3 for Waiting
     int timeSlice;                  // CPU Scheduling info, amt of time given for the process is paused and other information
     int processPriority;            // Non-negative integer representing the priority of the process. lower number = higher priority
@@ -48,7 +44,7 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
     int turnAroundTime;             // Total time taken by process between starting state and ending state
     int waitingTime;                // Time for which process is in the ready queue, no yet executing
     PCB nextProcess;                // Reference to the next process in the queue. AKA program counter
-    private JobQueue<Integer> arr;
+    private ArrayList<Integer> arr;
     ScheduledExecutorService runIt;
     int timeReq = 10;
     int k;
@@ -62,16 +58,17 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
 
     public PCB(int pid, int k){
         this.pid = pid;
-        arr = new JobQueue<Integer>();
+        arr = new ArrayList<Integer>();
         this.k = k;
     }
 
-    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> UTILITY
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     private void count(){
         for(int i=0;i<10;i++){
             arr.add((i+1)*k);
+            print();
             sleep();
         }
     }
@@ -82,23 +79,17 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        print();
     }
 
     private void print(){
         System.out.println(arr);
     }
 
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
+    //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
     @Override
     public void run() {
         count();
     }
-
-    /*private void timeThread() {
-        System.out.println("Class thread called.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + this.getAccountNumber());
-        this.runIt = Executors.newSingleThreadScheduledExecutor();
-        this.runIt.scheduleAtFixedRate(this, 0, 300, TimeUnit.MILLISECONDS); // checks
-        // every 5
-        // seconds
-    }*/
 }

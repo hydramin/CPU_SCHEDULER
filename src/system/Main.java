@@ -1,30 +1,25 @@
 package system;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.concurrent.ScheduledExecutorService;
+
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main{
 
-    ScheduledExecutorService p;
-
-    public static ArrayList<PCB> create(){
-        ArrayList<PCB> pcbs = new ArrayList<>();
-        for(int i=0;i<=5;i++){
-            PCB pcb = new PCB(i,i+1);
-            pcbs.add(pcb);
+    public static void main(String[] args) {        
+        LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>();
+        for(int i=65;i<65+5;i++){
+            Process p = new Process((char) i, i-60);
+            list.offer(p);
         }
-        return pcbs;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<PCB> t = Main.create();
-        Iterator<PCB> it = t.iterator();
-        CPU.getInstance();
-//        CPU.setCurrent(t);
-//        while (it.hasNext()){
-//            it.next().run();
-//        }
-        System.out.println("Ending here!");
+        System.out.println("hi there");
+        FCFS f = new FCFS();
+        
+        System.out.println("hi there");
+        f.setList(list);
+        System.out.println("hi there");
+        f.numPrint();
+        System.out.println("Die Fool!");
     }
 }
