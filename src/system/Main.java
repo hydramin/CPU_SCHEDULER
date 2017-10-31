@@ -16,11 +16,12 @@ public class Main{
         System.out.println("hi there");
         // FCFS f = new FCFS();
         RR f = new RR();
+        ProcessGen.generate(list);
         
         
         System.out.println("RR created");
         f.setList(list);
-        ProcessGen.generate(f.getList());
+        // ProcessGen.generate(f.getList());
         System.out.println("RR took in list");
         f.numPrint();
         System.out.println("Die Fool!");

@@ -16,7 +16,7 @@ public class RR{
        list = l;       
     }
 
-    public LinkedBlockingQueue getList(){
+    public LinkedBlockingQueue<Process> getList(){
         return this.list;
     }
 

@@ -9,16 +9,17 @@ public class ProcessGen implements Runnable{
 /* Genetates a random Process with random attributes*/
     private Process p;
     private static ProcessGen pr;
-    private static LinkedBlockingQueue queue;
+    private LinkedBlockingQueue<Process> queue;
     private static ScheduledExecutorService pay;
 
 /* Has to be a singleton that runns once*/
-    private ProcessGen(LinkedBlockingQueue queue){
-        this.queue = queue;
+    private ProcessGen(LinkedBlockingQueue<Process> queue){
+        super();
+        this.queue = queue;        
         timeThread();
     }
 
-    public static void generate(LinkedBlockingQueue queue){
+    public static void generate(LinkedBlockingQueue<Process> queue){
         if(pr == null)
             pr = new ProcessGen(queue);        
     }
@@ -28,8 +29,19 @@ public class ProcessGen implements Runnable{
         p = new Process('U');  
         if(!queue.isEmpty())
             queue.offer(p);    
-        else    
-            this.pay.shutdown();
+        else{                
+            ProcessGen.pay.shutdown();
+        }
+    }
+
+    public void processEnqueu(char ch){
+        // System.out.println("<><><><>ENQUEUE<><><><>");
+        p = new Process(ch);  
+        if(!queue.isEmpty())
+            queue.offer(p);    
+        else{                
+            ProcessGen.pay.shutdown();
+        }
     }
 
     @Override
@@ -39,9 +51,13 @@ public class ProcessGen implements Runnable{
     }
 
     void timeThread() {    
-        System.out.println("Class thread called.>>>>>>>>");
-        ProcessGen.pay = Executors.newSingleThreadScheduledExecutor();
-        ProcessGen.pay.scheduleAtFixedRate(this, 10, 20, TimeUnit.SECONDS);                                                                    
-	}
-
+        try{
+            System.out.println("Class thread called.>>>>>>>>");
+            ProcessGen.pay = Executors.newSingleThreadScheduledExecutor();
+            ProcessGen.pay.scheduleAtFixedRate(this, 10, 20, TimeUnit.SECONDS);                                                                    
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
 }

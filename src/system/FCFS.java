@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class FCFS implements Runnable{
 
     private LinkedBlockingQueue<Process> list;
+    private LinkedBlockingQueue<Process> deviceList;
     // private ExecutorService thread;
     
     public FCFS(){

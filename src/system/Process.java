@@ -1,5 +1,7 @@
 package system;
 
+import java.util.ArrayList;
+
 public class Process{
     private long arrivalTime; // the time the process requests CPU/ readyqueue entry
                             // the arrivalTime has to be set by the Queue 
@@ -11,48 +13,81 @@ public class Process{
     private int processState; // 0-new, 1-running, 2-ready, 3-io wait, 4-terminated
 
     private boolean run;
+    private ArrayList<Character> processSite;
     public char c;
     private int numOfprint;
     private final int maxPrint = 15;
+    private final BurstSpec timeSpec[] = {
+        new BurstSpec(12,4,0),
+        new BurstSpec(7,3,1),
+        new BurstSpec(4,2,2)
+    };
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public Process(char a){
+    public Process(){
         arrivalTime = 0;
         cpuBurst = 0;
         ioBurst = 0;
         processPriority = 0;
         processState = 0;
         run = true;
-        c = a;
+        c = 'A';
         numOfprint = 0;
+        processSite = new ArrayList<>();
+
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     
-    public long getArrivalTime(){
-        return this.arrivalTime;
+    /**
+     * @return the arrivalTime
+     */
+    public long getArrivalTime() {
+        return arrivalTime;
     }
 
-    public int getCpuBurst(){
-        return this.cpuBurst;
+    /**
+     * @return the cpuBurst
+     */
+    public int getCpuBurst() {
+        return cpuBurst;
     }
 
-    public int getIoBurst(){
-        return this.ioBurst;
+    /**
+     * @return the ioBurst
+     */
+    public int getIoBurst() {
+        return ioBurst;
     }
 
-    public int getProcessPriority(){
-        return this.processPriority;
+    /**
+     * @return the processPriority
+     */
+    public int getProcessPriority() {
+        return processPriority;
     }
 
-    public int getProcessState(){
-        return this.processState;
+    /**
+     * @return the processState
+     */
+    public int getProcessState() {
+        return processState;
     }
 
-    public char getC(){
-        return this.c;
+    /**
+     * @return the c
+     */
+    public char getC() {
+        return c;
+    }
+
+    /**
+     * @return the timeSpec
+     */
+    public BurstSpec[] getTimeSpec() {
+        return timeSpec;
     }
 
     /**
@@ -67,6 +102,10 @@ public class Process{
      */
     public int getMaxPrint() {
         return maxPrint;
+    }
+
+    public ArrayList<Integer> getProcessSite(){
+        return this.processSite;
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
@@ -103,12 +142,8 @@ public class Process{
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
-    public void count(){
-        for(int i=0;i<3;i++){            
-            print();
-            upNumOfPrint();
-            sleep();
-        }
+    public void fillArray(){
+        this.processSite.add((char) c++);
     }
 
     public void run(){
@@ -133,4 +168,41 @@ public class Process{
     public String toString() {
         return "current char -> "+ c;
     }
+
+    /*a private class to hold the CPU, I/O burst and device instructions for the Process*/
+    private class BurstSpec{
+        int cpuTime;
+        int ioTime;
+        int device;
+
+        public BurstSpec(int c, int i, int d){
+            this.cpuTime = c;
+            this.ioTime = i;
+            this.device = d;
+        }
+
+        /**
+         * @return the cpuTime
+         */
+        public int getCpuTime() {
+            return cpuTime;
+        }
+
+        /**
+         * @return the device
+         */
+        public int getDevice() {
+            return device;
+        }
+
+        /**
+         * @return the ioTime
+         */
+        public int getIoTime() {
+            return ioTime;
+        }
+    }
 }
+
+/*io burst for the process
+*/
