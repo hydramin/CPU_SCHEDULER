@@ -17,8 +17,10 @@ public class Main{
         // FCFS f = new FCFS();
         RR f = new RR();
         
+        
         System.out.println("RR created");
         f.setList(list);
+        ProcessGen.generate(f.getList());
         System.out.println("RR took in list");
         f.numPrint();
         System.out.println("Die Fool!");

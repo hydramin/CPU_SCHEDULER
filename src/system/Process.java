@@ -2,8 +2,11 @@ package system;
 
 public class Process{
     private long arrivalTime; // the time the process requests CPU/ readyqueue entry
-    private int cpuBurst; // time being processed on the cpu
+                            // the arrivalTime has to be set by the Queue 
+    private int cpuBurst; // time being processed on the cpu, 
+                        // it starts from zero and any time the run is called it is incremented by one 
     private int ioBurst; // time the program waits for io
+                        // at random it 
     private int processPriority; // 1 highest 10 lowest, for priority schedueling
     private int processState; // 0-new, 1-running, 2-ready, 3-io wait, 4-terminated
 
@@ -116,7 +119,7 @@ public class Process{
 
     public void sleep(){
         try {
-            Thread.sleep(500L);
+            Thread.sleep(200L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -124,5 +127,10 @@ public class Process{
 
     private void print(){
         System.out.printf("%c ",c);
+    }
+
+    @Override
+    public String toString() {
+        return "current char -> "+ c;
     }
 }

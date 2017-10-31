@@ -16,6 +16,10 @@ public class RR{
        list = l;       
     }
 
+    public LinkedBlockingQueue getList(){
+        return this.list;
+    }
+
     public void numPrint(){
         // Iterator<Process> it = list.iterator();
         Process p;
@@ -44,5 +48,10 @@ public class RR{
                 System.out.println(e);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return list.element().toString();
     }
 }
