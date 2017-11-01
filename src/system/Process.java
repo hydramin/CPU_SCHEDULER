@@ -25,10 +25,11 @@ public class Process{
     };
     private LinkedList<BurstSpec> timeSpec = new LinkedList<>(Arrays.asList(spec));
     private int maxPrint = 15;
+    private char chr;
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public Process(){
+    public Process(char chr){
         arrivalTime = 0;
         cpuBurst = 0;
         ioBurst = 0;
@@ -36,12 +37,13 @@ public class Process{
         processState = 0;
         run = true;
         c = 'A';
+        this.chr = chr;
         numOfprint = 0;
         processSite = new ArrayList<>();
         setMaxPrint();
 
     }
-
+    public Process(){}
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
  
@@ -146,8 +148,8 @@ public class Process{
 
     private void setMaxPrint(){
         
-        for(int i = 0;i<this.timeSpec.length;i++){
-            this.maxPrint += this.timeSpec[i].getCpuTime();
+        for(int i = 0;i<this.timeSpec.size();i++){
+            this.maxPrint += this.timeSpec.get(i).getCpuTime();
         }
     }
 
@@ -155,7 +157,7 @@ public class Process{
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     public void fillArray(){
-        System.out.println("ArrayFilled!");
+        //System.out.println("ArrayFilled!");
         this.processSite.add(c++);
     }
 
@@ -186,7 +188,7 @@ public class Process{
 
     @Override
     public String toString() {
-        return "current char -> "+ c;
+        return "-> "+ chr;
     }
 
     /*a private class to hold the CPU, I/O burst and 

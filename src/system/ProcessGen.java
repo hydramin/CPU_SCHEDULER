@@ -58,7 +58,7 @@ public class ProcessGen implements Runnable{
 
     void timeThread() {    
         try{
-            System.out.println("Class thread called.>>>>>>>>");
+            System.out.println("ProcessGen thread called.>>>>>>>>");
             ProcessGen.pay = Executors.newSingleThreadScheduledExecutor();
             ProcessGen.pay.scheduleAtFixedRate(this, 5, 6, TimeUnit.SECONDS);                                                                    
         }catch(Exception e){

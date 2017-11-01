@@ -1,6 +1,7 @@
 package system;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -10,20 +11,26 @@ public class Device implements Runnable{
 /* Device is a multiton class Key:Value pair is Device_Num : Device_Instance*/    
     private LinkedBlockingQueue<Process> deviceQueue; // Each device has a queue of its own
     private LinkedBlockingQueue<Process> returnQueue; // Each device has a queue of its own
-    private ScheduledExecutorService pay; // Each device is a thread of its own
-    private static HashMap<Integer, Device> currentDevices;
+    // private ScheduledExecutorService pay; // Each device is a thread of its own
+    private static HashMap<Integer, Device> currentDevices = new HashMap<>();
+    ExecutorService executorService = Executors.newFixedThreadPool(1);
 
 /* Has to be a singleton that runns once*/
     private Device(Process pr){             
         // this.deviceEnqueu(pr);
+        System.out.println("DEVICE CREATED!");
+        deviceQueue = new LinkedBlockingQueue<>();
+        returnQueue = new LinkedBlockingQueue<>();
         deviceQueue.offer(pr);       
-        currentDevices = new HashMap<>(); 
+        // currentDevices = new HashMap<>(); 
         timeThread();
     }
 
     public static Device getDevice(int n, Process pr){
-        if (!currentDevices.containsKey(n))
+        System.out.println(currentDevices.containsKey(n));
+        if (!currentDevices.containsKey(n)){
             currentDevices.put(n, new Device(pr));
+        }
         return currentDevices.get(n);
     }
 
@@ -35,27 +42,33 @@ public class Device implements Runnable{
             this.returnQueue = returnQueue;
     }
 
-    // public void deviceEnqueu(Process p){        
-    //     deviceQueue.offer(p);
-    // }
+    public void deviceEnqueu(Process p){   
+        if(!deviceQueue.contains(p))     
+            deviceQueue.offer(p);
+    }
 
     private void ioService(){ // this service runs the ioPrint of the process
         Process p = deviceQueue.element();
         for(int i = 0;i < p.getTimeSpec().getFirst().getIoTime();i++){
-            p.ioRun(d);
+            p.ioRun(p.getTimeSpec().getFirst().getDevice());
             // sleep();
         }
         p.getTimeSpec().removeFirst();
+        System.out.println("PRINT DEVICE QUEUE: "+deviceQueue);
         returnQueue.offer(p);
         deviceQueue.remove(p);
 
-        if(deviceQueue.isEmpty())
-            this.pay.shutdown();
+        if(deviceQueue.isEmpty()){}
+            // this.pay.shutdown();
     }
 
     @Override
-    public void run() {        
-        ioService();        
+    public void run() {  
+        while(true){    
+            if(this.deviceQueue.size()!=0){  
+                ioService();
+            }
+        }        
         // System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
     }
 
@@ -69,9 +82,10 @@ public class Device implements Runnable{
 
     void timeThread() {    
         try{
-            System.out.println("Class thread called.>>>>>>>>");
-            this.pay = Executors.newSingleThreadScheduledExecutor();
-            this.pay.scheduleAtFixedRate(this, 5, 6, TimeUnit.SECONDS);                                                                    
+            System.out.println("Device thread called.>>>>>>>>");
+            // this.pay = Executors.newSingleThreadScheduledExecutor();
+            // this.pay.scheduleAtFixedRate(this, 0, 1, TimeUnit.SECONDS);                                                                    
+            executorService.execute(this); 
         }catch(Exception e){
             e.printStackTrace();
         }

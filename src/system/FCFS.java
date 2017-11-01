@@ -35,7 +35,7 @@ public class FCFS implements Runnable{
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     @Override
     public void run(){
-        numPrint();
+        numPrint1();
     }
 
     public void numPrint(){
@@ -67,18 +67,22 @@ public class FCFS implements Runnable{
         while(true){
             if(list.size()!=0){
                 p = list.poll();
-                for(int i=0;i<p.getTimeSpec().size();i++){
+                for(int i=0;i<p.getTimeSpec().size();i++){ // sequence of instructions
+                    System.out.println("CPU BURST HAPPENS" + p);
                     for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
-                        // p.run();
+                        p.run(); // fills array
                         // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
                     }
                     
+                    System.out.println("IO BURST HAPPENS" + p);
                     /* This loop deals when there is IO burst following the above CPU burst*/
                     if(p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
                         // move this process into the Device queue
                         // the device thread runs every second and it executes any IO from the queue's head
+
                         Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p);
-                        // d.deviceEnqueu(p);
+                        // System.out.println(d == null);
+                        d.deviceEnqueu(p);
                         d.setReturnQueue(list);
                     }
                     /*for(int k = 0; k<p.getTimeSpec()[i].getIoTime();k++){
@@ -91,6 +95,8 @@ public class FCFS implements Runnable{
                 // break;     
                 System.out.println("Empty Queue");           
             }
+
+            System.out.println("{}{}{}{}{}<><><> "+list);
     
             try{
             Thread.sleep(500L);
