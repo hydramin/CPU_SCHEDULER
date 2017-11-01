@@ -1,6 +1,8 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Arrays;
 
 public class Process{
     private long arrivalTime; // the time the process requests CPU/ readyqueue entry
@@ -15,13 +17,14 @@ public class Process{
     private boolean run;
     private ArrayList<Character> processSite;
     public char c;
-    private int numOfprint;
-    private final int maxPrint = 15;
-    private final BurstSpec timeSpec[] = {
+    private int numOfprint;        
+    private final BurstSpec spec[] = {
         new BurstSpec(12,4,0),
         new BurstSpec(7,3,1),
         new BurstSpec(4,2,2)
     };
+    private LinkedList<BurstSpec> timeSpec = new LinkedList<>(Arrays.asList(spec));
+    private int maxPrint = 15;
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -35,12 +38,14 @@ public class Process{
         c = 'A';
         numOfprint = 0;
         processSite = new ArrayList<>();
+        setMaxPrint();
 
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    
+ 
+
     /**
      * @return the arrivalTime
      */
@@ -86,7 +91,7 @@ public class Process{
     /**
      * @return the timeSpec
      */
-    public BurstSpec[] getTimeSpec() {
+    public LinkedList<BurstSpec> getTimeSpec() {
         return timeSpec;
     }
 
@@ -104,7 +109,7 @@ public class Process{
         return maxPrint;
     }
 
-    public ArrayList<Integer> getProcessSite(){
+    public ArrayList<Character> getProcessSite(){
         return this.processSite;
     }
 
@@ -139,16 +144,30 @@ public class Process{
         this.numOfprint++;
     }
 
+    private void setMaxPrint(){
+        
+        for(int i = 0;i<this.timeSpec.length;i++){
+            this.maxPrint += this.timeSpec[i].getCpuTime();
+        }
+    }
+
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     public void fillArray(){
-        this.processSite.add((char) c++);
+        System.out.println("ArrayFilled!");
+        this.processSite.add(c++);
     }
 
     public void run(){
-        print();
+        fillArray();
+        // print();
         upNumOfPrint();
+        sleep();
+    }
+
+    public void ioRun(int d){
+        System.out.println("I/O wait active! Decive-"+d);
         sleep();
     }
 
@@ -161,7 +180,8 @@ public class Process{
     }
 
     private void print(){
-        System.out.printf("%c ",c);
+        // System.out.printf("%c ",c);
+        System.out.println(this.processSite);
     }
 
     @Override
@@ -169,8 +189,9 @@ public class Process{
         return "current char -> "+ c;
     }
 
-    /*a private class to hold the CPU, I/O burst and device instructions for the Process*/
-    private class BurstSpec{
+    /*a private class to hold the CPU, I/O burst and 
+    device instructions for the Process*/
+    public class BurstSpec {
         int cpuTime;
         int ioTime;
         int device;

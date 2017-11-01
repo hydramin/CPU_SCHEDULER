@@ -9,21 +9,21 @@ public class Main{
 
     public static void main(String[] args) {        
         LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>();
-        for(int i=65;i<65+5;i++){
-            Process p = new Process((char) i);
-            list.offer(p);
-        }
+        // for(int i=65;i<65+2;i++){
+        //     Process p = new Process();
+        //     list.offer(p);
+        // }
         System.out.println("hi there");
-        // FCFS f = new FCFS();
-        RR f = new RR();
-        ProcessGen.generate(list);
+        FCFS f = new FCFS();
+        // RR f = new RR();
+        // ProcessGen.generate(list);
         
         
         System.out.println("RR created");
         f.setList(list);
-        // ProcessGen.generate(f.getList());
+        ProcessGen.generate(f.getList());
         System.out.println("RR took in list");
-        f.numPrint();
+        f.numPrint1();
         System.out.println("Die Fool!");
     }
 }

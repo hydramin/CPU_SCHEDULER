@@ -11,11 +11,12 @@ public class ProcessGen implements Runnable{
     private static ProcessGen pr;
     private LinkedBlockingQueue<Process> queue;
     private static ScheduledExecutorService pay;
+    private static int numOfProcAdded;
 
 /* Has to be a singleton that runns once*/
     private ProcessGen(LinkedBlockingQueue<Process> queue){
-        super();
-        this.queue = queue;        
+        this.queue = queue;   
+        numOfProcAdded = 0;     
         timeThread();
     }
 
@@ -26,15 +27,20 @@ public class ProcessGen implements Runnable{
 
     public void processEnqueu(){
         // System.out.println("<><><><>ENQUEUE<><><><>");
-        p = new Process('U');  
-        if(!queue.isEmpty())
-            queue.offer(p);    
-        else{                
+        if(numOfProcAdded ==5)
             ProcessGen.pay.shutdown();
-        }
+
+        p = new Process();  
+        if(queue.isEmpty()){
+            queue.offer(p);
+            numOfProcAdded++;
+        }           
+        // else{                
+        //     ProcessGen.pay.shutdown();
+        // }
     }
 
-    public void processEnqueu(char ch){
+    /*public void processEnqueu(char ch){
         // System.out.println("<><><><>ENQUEUE<><><><>");
         p = new Process(ch);  
         if(!queue.isEmpty())
@@ -42,19 +48,19 @@ public class ProcessGen implements Runnable{
         else{                
             ProcessGen.pay.shutdown();
         }
-    }
+    }*/
 
     @Override
     public void run() {        
         processEnqueu();
-        // System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
+        System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
     }
 
     void timeThread() {    
         try{
             System.out.println("Class thread called.>>>>>>>>");
             ProcessGen.pay = Executors.newSingleThreadScheduledExecutor();
-            ProcessGen.pay.scheduleAtFixedRate(this, 10, 20, TimeUnit.SECONDS);                                                                    
+            ProcessGen.pay.scheduleAtFixedRate(this, 5, 6, TimeUnit.SECONDS);                                                                    
         }catch(Exception e){
             e.printStackTrace();
         }

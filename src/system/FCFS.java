@@ -10,22 +10,29 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class FCFS implements Runnable{
 
-    private LinkedBlockingQueue<Process> list;
-    private LinkedBlockingQueue<Process> deviceList;
+    private LinkedBlockingQueue<Process> list;    
     // private ExecutorService thread;
     
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public FCFS(){
         // timeThread();
     }
 
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
     public LinkedBlockingQueue<Process> getList(){
         return this.list;
     }
-
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public void setList(LinkedBlockingQueue<Process> l){
        list = l;       
     }
 
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     @Override
     public void run(){
         numPrint();
@@ -53,4 +60,44 @@ public class FCFS implements Runnable{
             }
         }
     }
+
+    public void numPrint1(){
+        // Iterator<Process> it = list.iterator();
+        Process p;
+        while(true){
+            if(list.size()!=0){
+                p = list.poll();
+                for(int i=0;i<p.getTimeSpec().size();i++){
+                    for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
+                        // p.run();
+                        // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
+                    }
+                    
+                    /* This loop deals when there is IO burst following the above CPU burst*/
+                    if(p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
+                        // move this process into the Device queue
+                        // the device thread runs every second and it executes any IO from the queue's head
+                        Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p);
+                        // d.deviceEnqueu(p);
+                        d.setReturnQueue(list);
+                    }
+                    /*for(int k = 0; k<p.getTimeSpec()[i].getIoTime();k++){
+                        p.ioRun(p.getTimeSpec()[i].getDevice());
+                        // System.out.printf("This is I/O time: ",p.getTimeSpec()[i].getIoTime());
+                    }*/
+                }
+            }else{
+                // System.exit(0);
+                // break;     
+                System.out.println("Empty Queue");           
+            }
+    
+            try{
+            Thread.sleep(500L);
+            }catch (InterruptedException e){
+                System.out.println(e);
+            }
+        }
+    }
 }
+
