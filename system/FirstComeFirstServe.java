@@ -11,7 +11,7 @@ public class FirstComeFirstServe {
     public void schedule() {
         while (!queue.isEmpty()) {
             currentProcess = pickNextProcess();
-            CPU.run(currentProcess);
+            // CPU.run(currentProcess);
         }
     }
 

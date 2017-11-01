@@ -1,22 +1,13 @@
 package system;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.concurrent.ScheduledExecutorService;
+
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main{
 
-    ScheduledExecutorService p;
-
-    public static ArrayList<PCB> create(){
-        ArrayList<PCB> pcbs = new ArrayList<>();
-        for(int i=0;i<=5;i++){
-            PCB pcb = new PCB(i,i+1);
-            pcbs.add(pcb);
-        }
-        return pcbs;
-    }
-
+<<<<<<< HEAD
     public static void main(String[] args) {
         ArrayList<PCB> t = Main.create();
         Iterator<PCB> it = t.iterator();
@@ -37,5 +28,25 @@ public class Main{
             }
         }
         System.out.println("Ending here!");
+=======
+    public static void main(String[] args) {        
+        LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>();
+        // for(int i=65;i<65+2;i++){
+        //     Process p = new Process();
+        //     list.offer(p);
+        // }
+        System.out.println("hi there");
+        FCFS f = new FCFS();
+        // RR f = new RR();
+        // ProcessGen.generate(list);
+        
+        
+        System.out.println("RR created");
+        f.setList(list);
+        ProcessGen.generate(f.getList());
+        System.out.println("RR took in list");
+        f.numPrint1();
+        System.out.println("Die Fool!");
+>>>>>>> 9767ef5f16632bb47ce3bc35126c78a050e06f03
     }
 }
