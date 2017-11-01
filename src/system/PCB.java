@@ -33,6 +33,7 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
     * */
 
     /*The above fields will be the attributes of this class*/
+/*<<<<<<< HEAD
 
     private final int pid;// process identifier
     private int arrivalTime;
@@ -40,6 +41,23 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
     private int timeSlice;//CPU Scheduling info, amt of time given for the
                     // process is paused for RR schedueling
     private byte processPriority; // priority 0 to 127, must be positive
+=======*/
+    static int  pid;                // Process identifier
+    int arivalTimel;                // Time when process p first makes request for execution from CPU scheduler
+    /**
+     * Suggestion: we could represent the state as an int;
+     *          0 for New, 1 for Ready, 2 for Running, and 3 for Waiting.
+     */
+    int processState;               // The state of the process. 0 for New, 1 for Ready, 2 for Running, and 3 for Waiting
+    int timeSlice;                  // CPU Scheduling info, amt of time given for the process is paused and other information
+    int processPriority;            // Non-negative integer representing the priority of the process. lower number = higher priority
+    int CPUTime;                    // Non-negative integer representing time needed for process to execute on CPU
+    int IOTime;                     // Non-negative integer representing time needed for I/O operation
+    int completionTime;             // Time when the process has completed
+    int turnAroundTime;             // Total time taken by process between starting state and ending state
+    int waitingTime;                // Time for which process is in the ready queue, no yet executing
+    PCB nextProcess;                // Reference to the next process in the queue. AKA program counter
+//>>>>>>> 28a0dd924b47e6779e464c01cb1465e4e0b12dc9
     private JobQueue<Integer> arr;
     ScheduledExecutorService runIt;
     int timeReq = 10;
@@ -47,6 +65,7 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
 
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
     public PCB(){
         this(0,1);
     }
@@ -92,5 +111,4 @@ public class PCB implements Runnable{ // Each process is represented by a PCB
         // every 5
         // seconds
     }*/
-
 }

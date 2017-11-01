@@ -57,4 +57,7 @@ public class CPU implements  Runnable{
     }
 
 
+    public static void run(PCB currentProcess) {
+        //some how run the process lol
+    }
 }
