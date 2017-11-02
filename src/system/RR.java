@@ -20,7 +20,7 @@ public class RR{
         return this.list;
     }
 
-    public void numPrint(){
+    /*public void numPrint(){
         // Iterator<Process> it = list.iterator();
         Process p;
         while(true){
@@ -48,7 +48,7 @@ public class RR{
                 System.out.println(e);
             }
         }
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -8,11 +8,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Main{
 
     public static void main(String[] args) {        
-        LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>();
-        for(int i=65;i<65+2;i++){
-            Process p = new Process((char) i);
-            list.offer(p);
-        }
+        LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>(); // the list to be passed around
+        // for(int i=65;i<65+2;i++){
+        //     Process p = new Process((char) i);
+        //     list.offer(p);
+        // }
         System.out.println("list size "+list.size());
         FCFS f = new FCFS();
         // RR f = new RR();
@@ -21,8 +21,8 @@ public class Main{
         
         System.out.println("RR created");
         f.setList(list);
-        // ProcessGen.generate(f.getList());
-        System.out.println("RR took in list");
+        ProcessGen.generate(FCFS.getList());
+        System.out.println("RR took in list: "+ list.hashCode());
         f.numPrint1();
         System.out.println("Die Fool!");
     }
