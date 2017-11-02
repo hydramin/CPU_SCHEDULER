@@ -21,7 +21,7 @@ public class ProcessGen implements Runnable{
     private ProcessGen(LinkedBlockingQueue<Process> queue){
         ProcessGen.queue = queue;  
         ProcessGen.jobQueue  = new LinkedBlockingQueue<Process>();
-        numOfProcAdded = 0;  
+        numOfProcAdded = 1;  
         jobProcessEnqueu(); // there must be atleast one job in the job queue   
         timeThread();
     }

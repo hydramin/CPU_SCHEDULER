@@ -13,14 +13,14 @@ import java.util.concurrent.TimeUnit;
 public class FCFS implements Runnable{
 
     private static LinkedBlockingQueue<Process> list;    
-    private LinkedBlockingQueue<Process> copyList; 
+    private ArrayList<Process> copyList; 
     // private ExecutorService thread;
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public FCFS(){
         list = new LinkedBlockingQueue<Process>();
-        copyList = new LinkedBlockingQueue<Process>();
+        copyList = new ArrayList<Process>();
         // timeThread();
     }
 
@@ -38,7 +38,7 @@ public class FCFS implements Runnable{
 
     public void makeCopy(Process p){
         if(!copyList.contains(p))
-            copyList.offer(p);
+            copyList.add(p);
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
@@ -134,8 +134,20 @@ public class FCFS implements Runnable{
 
         System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
         for (Process pr: copyList) {
-            System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
+            // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
+            pr.setProcessState(4);
+            System.out.println(pr);
         }
+        int first=0, second=0;
+        double avgWaiting=0;
+        for(int i = 0; i<copyList.size();i++){
+            if(i>0)
+                second+=copyList.get(i).getArrivalTime();
+            if(i<copyList.size()-1)
+                first+=copyList.get(i).getArrivalTime();
+        }
+        avgWaiting = (second - first)/copyList.size();
+        System.out.println(avgWaiting);
     }
 }
 
