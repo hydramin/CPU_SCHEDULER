@@ -31,6 +31,10 @@ public class ProcessGen implements Runnable{
             pr = new ProcessGen(queue);        
     }
 
+    /**
+     * @Description: it fills the jobQueue in a FIFO way, it is not the ready queue, 
+     * every 10 seconds one is taken and passed into the ready queue by processEnqueu
+    */
     public void jobProcessEnqueu(){
         // System.out.println("<><><><>ENQUEUE<><><><>");   
 
@@ -40,6 +44,9 @@ public class ProcessGen implements Runnable{
         jobQueue.offer(p);        
     }
 
+    /**
+     * @Description: it takes the first process from the jobQueue and passes it into the FIFO ready queue
+    */
     public void processEnqueu(){ // transfer from the job queue to the ready queue
         if(numOfProcAdded == 5)
             ProcessGen.pay.shutdown();
@@ -51,10 +58,19 @@ public class ProcessGen implements Runnable{
         
     }
 
+    /**
+     * @Description: it creates a random character as an identity for the process created by jopProcessEnqueue
+     * @return: returns a random letter from A to Z
+    */
     private char randChar(){
         Random r = new Random();
         return (char) (65 + r.nextInt(26));
     }
+
+    /**
+     * @Description: it generates a random number from 1 to 10 to specify priority of a process
+     * @return: returns a random number from 1 to 10
+    */
     private int randPriority(){
         Random r = new Random();
         return (1 + r.nextInt(10));
