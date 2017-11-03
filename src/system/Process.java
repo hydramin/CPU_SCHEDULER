@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Arrays;
 
 public class Process{
+    private long creationTime; // time the process is created
+    private long terminationTime; // termination time for the process    
     private long arrivalTime; // The time when the FCFS      
     private int cpuBurst; // time being processed on the cpu, 
                         // it starts from zero and any time the run is called it is incremented by one 
@@ -21,13 +23,16 @@ public class Process{
         new BurstSpec(7,3,0),
         new BurstSpec(4,2,0)
     };
-    private LinkedList<BurstSpec> timeSpec = new LinkedList<>(Arrays.asList(spec));
+    private LinkedList<BurstSpec> timeSpec = new LinkedList<>();
+
     // private int maxPrint = 15;
-    public char chr;
+    private int processID;
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public Process(char chr){
+    public Process(){
+        creationTime = 0;
+        terminationTime = 0;
         arrivalTime = 0;
         cpuBurst = 0;
         ioBurst = 0;
@@ -35,13 +40,19 @@ public class Process{
         processState = 0;
         // run = true;
         c = 'A';
-        this.chr = chr; // identifies the partifular process
+        
         // numOfprint = 0; 
         processSite = new ArrayList<>();
         // setMaxPrint();
+        // timeSpec.add(new BurstSpec(6,5,0));
+        // timeSpec.add(new BurstSpec(7,3,0));
+        // timeSpec.add(new BurstSpec(4,2,0));
 
     }
-    public Process(){}
+    public Process(int processID){
+        this();
+        this.processID = processID; // identifies the partifular process
+    }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
  
@@ -113,19 +124,35 @@ public class Process{
         return this.processSite;
     }
 
+    public long getCreationTime(){
+        return this.creationTime;
+    }
+
+    public long getTerminationTime(){
+        return this.terminationTime;
+    }
+
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+    public void setCreationTime(long time){
+        this.creationTime = time;
+    }
 
     public void setArrivalTime(long time){ // getting in the FCFS
         this.arrivalTime = time;
     }
 
-    private void upCpuBurst(){
-        ++this.cpuBurst;
+    public void setTerminationTime(long time){ // getting in the FCFS
+        this.terminationTime = time;
     }
 
-    private void upIoBurst(){
-        ++this.ioBurst;
+    public void upCpuBurst(long time){
+        this.cpuBurst+= time;
+    }
+
+    public void upIoBurst(long time){
+        this.ioBurst+=time;
     }
 
     public void setPriority(int priority){
@@ -136,9 +163,9 @@ public class Process{
         this.processState = state;
     }
 
-    // private void upNumOfPrint(){
-    //     this.numOfprint++;
-    // }
+    public void setTimeSpec(int cpu, int io, int device){        
+        this.timeSpec.add(new BurstSpec(cpu,io,device));
+    }
 
     // private void setMaxPrint(){
         
@@ -157,16 +184,16 @@ public class Process{
 
     public void run(){
         fillArray();
-        // print();
-        upCpuBurst();
+        print();
+        // upCpuBurst(2000);
         // upNumOfPrint();
         // sleep();
     }
 
     public void ioRun(int d){
         // System.out.println("I/O wait active! Decive-"+d);
-        System.out.printf("I/O wait active! Decive- %d Process- %c\n",d,chr);
-        upIoBurst();
+        System.out.printf("I/O wait active! Decive- %d Process- %d\n",d,processID);
+        // upIoBurst();
         // sleep();
     }
 
@@ -185,7 +212,7 @@ public class Process{
 
     @Override
     public String toString() {
-        return String.format("Name: %c, Arrival: %d, Priority: %d , State: %d\n",chr, arrivalTime,processPriority,processState);
+        return String.format("Process: %d, Arrival: %d, Priority: %d , State: %d\n",processID, arrivalTime,processPriority,processState);
     }
 
     /*a private class to hold the CPU, I/O burst and 
@@ -220,6 +247,10 @@ public class Process{
          */
         public int getIoTime() {
             return ioTime;
+        }
+
+        public void downCpuTime(){
+            --this.cpuTime;
         }
 
         @Override

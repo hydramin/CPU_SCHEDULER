@@ -50,11 +50,13 @@ public class Device implements Runnable{
 
     private void ioService(){ // this service runs the ioPrint of the process
         Process p = deviceQueue.element();
+        p.upIoBurst(-time());
         for(int i = 0;i < p.getTimeSpec().getFirst().getIoTime();i++){
             p.ioRun(p.getTimeSpec().getFirst().getDevice());
             // System.out.printf("DEVICE QUEUE: %s, BURST SPEC: %s", deviceQueue, p.getTimeSpec());
             sleep();
         }
+        p.upIoBurst(time());
         // p.getTimeSpec().removeFirst();
 
         // System.out.println("PRINT DEVICE QUEUE 1: "+deviceQueue);
@@ -66,6 +68,8 @@ public class Device implements Runnable{
         if(!p.getTimeSpec().isEmpty()){
             p.setProcessState(1); // ready state when it goes back in ready queue
             Device.returnQueue.offer(p);
+        }else{
+            p.setTerminationTime(time());
         }
             // FCFS.getList().offer(p);
         // System.out.println("RETURN QUEUE RETURNED: "+list.hashCode());
@@ -74,6 +78,12 @@ public class Device implements Runnable{
         if(deviceQueue.isEmpty()){}
             // this.executorService.shutdown();
     }
+
+    private static long time() {
+		long timeMillis = System.currentTimeMillis();
+		long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+		return timeSeconds;
+	}
 
     @Override
     public void run() {  

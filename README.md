@@ -35,7 +35,8 @@ Throughput.
     ==>For long processes, this rate may be one process per hour; for short transactions, it may be ten processes per second.
 Turnaround time. 
     ==>From the point of view of a particular process, the important criterion is how long it takes to execute that process. 
-    The interval from the time of submission of a process to the time of completion is the turnaround time. ==>Turnaround time is the sum of the periods spent waiting to get into memory, waiting in the ready queue, executing on the CPU, and doing I/O.
+    The interval from the time of submission of a process to the time of completion is the turnaround time. 
+    ==>Turnaround time is the sum of the periods spent waiting to get into memory, waiting in the ready queue, executing on the CPU, and doing I/O.
 Waiting time. 
     The CPU-scheduling algorithm does not affect the amount of time during which a process executes or does I/O. 
     ==>It affects only the amount of time that a process spends waiting in the ready queue.Waiting time is the sum of the periods spent waiting in the ready queue.
