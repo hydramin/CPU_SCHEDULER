@@ -25,58 +25,26 @@ public class RR{
         return RR.list;
     }
 
-    // public void cpuProccess(){
-    //     // Iterator<Process> it = list.iterator();
-    //     Process p;
-    //     while(true){
-    //         if(list.size()!=0){
-    //             p = list.poll();
-    //             for(int i=0;i<runLimit;i++){
-    //                 if(p.getNumOfprint() == p.getTimeSpec().getFirst().getCpuTime()){ // breaks if the print is done                       
-    //                     break;
-    //                 }else{
-    //                     p.run();                    
-    //                 }
-    //              }
-    //              if(p.getNumOfprint() != p.getTimeSpec().getFirst().getCpuTime()){                        
-    //                 list.offer(p);
-    //              }                           
-    //             // System.out.println("");
-    //         }else{
-    //             // System.exit(0);
-    //             break;                
-    //         }
-
-    //         sleep();
-    //     }
-    // }
-
-    public void makeCopy(Process p){
+    public void makeCopy(Process p){        
         if(!copyList.contains(p))
             copyList.add(p);
     }
-    private static long time() {
-		long timeMillis = System.currentTimeMillis();
-		long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
-        return timeSeconds;        
-	}
-
-
+       
     int i=0;
     public void cpuProccess(){
         // Iterator<Process> it = list.iterator();
         Process p;
         while(true){
             if(list.size()!=0){
-                System.out.println("RR LIST "+list);
+                // System.out.println("RR LIST "+list);
                 p = list.poll();
                 makeCopy(p);
-                System.out.println("POLLED : "+p);
+                // System.out.println("POLLED : "+p);
                 //for(int i=0;i<p.getTimeSpec().size();i++){ // sequence of instructions
                     // System.out.println("CPU BURST HAPPENS" + p);
                     p.setProcessState(2); // enters state 2 (running) before running
-                    p.upCpuBurst(-time());
-                    for(int j = 0; j<runLimit/*p.getTimeSpec().getFirst().getCpuTime()*/;j++){
+                    p.upCpuBurst(-Utility.time());                    
+                    for(int j = 0; j<runLimit;j++){
                         
                         // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
 
@@ -85,10 +53,10 @@ public class RR{
                         }else{
                             p.run(); // fills array
                             p.getTimeSpec().getFirst().downCpuTime();
-                            sleep();                    
+                            Utility.sleep();                    
                         }
-                    }
-                    p.upCpuBurst(time());
+                    }                    
+                    p.upCpuBurst(Utility.time());
 
                     if(p.getTimeSpec().getFirst().getCpuTime() != 0){                        
                          list.offer(p);
@@ -105,10 +73,7 @@ public class RR{
                         // Device.setReturnQueue(FCFS.getList());
                         d.deviceEnqueu(p);
                     }
-                    /*for(int k = 0; k<p.getTimeSpec()[i].getIoTime();k++){
-                        p.ioRun(p.getTimeSpec()[i].getDevice());
-                        // System.out.printf("This is I/O time: ",p.getTimeSpec()[i].getIoTime());
-                    }*/
+                    
                 //}
                 i = 0;
             }else{
@@ -123,17 +88,42 @@ public class RR{
             }  
             // System.out.println("{}{}{}{}{}<><><> "+list);
     
-            sleep();
+            Utility.sleep(); // context switch time
         }
 
+        // System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
+        // for (Process pr: copyList) {
+        //     // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
+        //     pr.setProcessState(4);
+        //     System.out.println(pr);
+        // }
+
+        // double avgCpuBurst = 0;
+        // double avgWaiting=0;
+        // double turnaroundTime=0;
+        // Process temp;
+        // for(int i = 0; i<copyList.size();i++){
+        //     temp = copyList.get(i);
+        //     turnaroundTime += (temp.getTerminationTime() - temp.getCreationTime());
+        //     avgCpuBurst+=(temp.getCpuBurst());
+        // }
+        // avgCpuBurst = avgCpuBurst/copyList.size();
+        // turnaroundTime = turnaroundTime/copyList.size();
+        // avgWaiting = turnaroundTime - avgCpuBurst;
+        // System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f\n \nAvg Turnaround: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst);
+        // // Utility.stopDevices();
+        calculate();
+    }
+
+    private void calculate(){
         System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
         for (Process pr: copyList) {
             // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
             pr.setProcessState(4);
-            System.out.println(pr);
+            System.out.println(pr.data());
         }
-
         double avgCpuBurst = 0;
+        double avgIoBurst = 0;
         double avgWaiting=0;
         double turnaroundTime=0;
         Process temp;
@@ -141,19 +131,16 @@ public class RR{
             temp = copyList.get(i);
             turnaroundTime += (temp.getTerminationTime() - temp.getCreationTime());
             avgCpuBurst+=(temp.getCpuBurst());
+            avgIoBurst+=(temp.getIoBurst());
         }
+        avgIoBurst = avgIoBurst/copyList.size();
         avgCpuBurst = avgCpuBurst/copyList.size();
         turnaroundTime = turnaroundTime/copyList.size();
         avgWaiting = turnaroundTime - avgCpuBurst;
-        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f\n",avgWaiting,turnaroundTime);
-        System.exit(0);
-    }
-
-    public void sleep(){
-        try {
-            Thread.sleep(800L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
+        
+        for (Process var : copyList) {
+            System.out.println(var.tester);
         }
     }
 

@@ -1,6 +1,7 @@
 package system;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -16,60 +17,73 @@ public class Device implements Runnable{
     ExecutorService executorService = Executors.newFixedThreadPool(1);
 
 /* Has to be a singleton that runns once*/
-    private Device(Process pr, LinkedBlockingQueue<Process> returnQueue){             
+    private Device(Process pr/*, LinkedBlockingQueue<Process> returnQueue*/){             
         // this.deviceEnqueu(pr);
         // System.out.println("DEVICE CREATED!");
         deviceQueue = new LinkedBlockingQueue<>();
-        Device.returnQueue = returnQueue;
+        // Device.returnQueue = returnQueue;
         deviceQueue.offer(pr);       
         // currentDevices = new HashMap<>(); 
         timeThread();
     }
 
+    public static HashMap<Integer, Device> getCurrentDevices() {
+        return Device.currentDevices;
+    }
+
+    public ExecutorService getExecutor(){
+        return this.executorService;
+    }
+
     public static Device getDevice(int n, Process pr, LinkedBlockingQueue<Process> returnQueue){
         // System.out.println(currentDevices.containsKey(n));
         if (!currentDevices.containsKey(n)){
-            currentDevices.put(n, new Device(pr, returnQueue));
-        }
+            currentDevices.put(n, new Device(pr));
+        }        
+        Device.returnQueue = returnQueue;
         return currentDevices.get(n);
     }
 
     /**
      * @param returnQueue the returnQueue to set
      */
-    /*public static void setReturnQueue(LinkedBlockingQueue<Process> returnQueue) {
-        // System.out.println("RETURN QUEUE");
-        if(returnQueue == null)
-            Device.returnQueue = returnQueue;
-    }*/
+    // public static void setReturnQueue(LinkedBlockingQueue<Process> returnQueue) {
+    //     // System.out.println("RETURN QUEUE");
+    //     if(returnQueue == null)
+    //         Device.returnQueue = returnQueue;
+    // }
 
     public void deviceEnqueu(Process p){   
         if(!deviceQueue.contains(p))     
             deviceQueue.offer(p);        
     }
 
+    public LinkedBlockingQueue<Process> getReturnQueue(){
+        return Device.returnQueue;
+    }
+
     private void ioService(){ // this service runs the ioPrint of the process
+        
         Process p = deviceQueue.element();
-        p.upIoBurst(-time());
         for(int i = 0;i < p.getTimeSpec().getFirst().getIoTime();i++){
+            p.upIoBurst(-Utility.time());
             p.ioRun(p.getTimeSpec().getFirst().getDevice());
             // System.out.printf("DEVICE QUEUE: %s, BURST SPEC: %s", deviceQueue, p.getTimeSpec());
-            sleep();
+            Utility.sleep();
+            p.upIoBurst(Utility.time());
         }
-        p.upIoBurst(time());
-        // p.getTimeSpec().removeFirst();
-
-        // System.out.println("PRINT DEVICE QUEUE 1: "+deviceQueue);
-        // System.out.printf("DEVICE QUEUE: %s, BURST SPEC: %s", deviceQueue, p.getTimeSpec());
-        p.getTimeSpec().removeFirst();
-
-        // System.out.println("RETURN QUEUE POLL: "+returnQueue.hashCode());
+       
+        System.out.println("TimeSpec list is : "+ p.getTimeSpec());
+        p.getTimeSpec().removeFirst();        
+        System.out.println("TimeSpec isEmpty : "+ p.getTimeSpec().isEmpty());
+        System.out.println("TimeSpec list is : "+ p.getTimeSpec());
         
         if(!p.getTimeSpec().isEmpty()){
             p.setProcessState(1); // ready state when it goes back in ready queue
             Device.returnQueue.offer(p);
         }else{
-            p.setTerminationTime(time());
+            System.out.println("****************************************************************");
+            p.setTerminationTime(Utility.time());
         }
             // FCFS.getList().offer(p);
         // System.out.println("RETURN QUEUE RETURNED: "+list.hashCode());
@@ -79,15 +93,9 @@ public class Device implements Runnable{
             // this.executorService.shutdown();
     }
 
-    private static long time() {
-		long timeMillis = System.currentTimeMillis();
-		long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);
-		return timeSeconds;
-	}
-
     @Override
     public void run() {  
-        while(true){    
+        while(true){                
             if(this.deviceQueue.size()!=0){  
                 ioService();
             }
@@ -95,19 +103,17 @@ public class Device implements Runnable{
         // System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
     }
 
-    public void sleep(){
-        try {
-            Thread.sleep(800L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    // public void sleep(){
+    //     try {
+    //         Thread.sleep(800L);
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     void timeThread() {    
         try{
-            System.out.println("Device thread called.>>>>>>>>");
-            // this.pay = Executors.newSingleThreadScheduledExecutor();
-            // this.pay.scheduleAtFixedRate(this, 0, 1, TimeUnit.SECONDS);                                                                    
+            System.out.println("Device thread called.>>>>>>>>");                                                                                
             executorService.execute(this); 
         }catch(Exception e){
             e.printStackTrace();

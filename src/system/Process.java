@@ -16,17 +16,14 @@ public class Process{
     private int processState; // 0-new, 2-running, 1-ready, 3-io wait, 4-terminated
 
     private ArrayList<Character> processSite; // one process action is filling the array.
-    public char c;
-    // private int numOfprint;        
-    private final BurstSpec spec[] = {
-        new BurstSpec(6,10,0),
-        new BurstSpec(7,3,0),
-        new BurstSpec(4,2,0)
-    };
+    private char c;
+    
+    String bSpec;
     private LinkedList<BurstSpec> timeSpec = new LinkedList<>();
 
     // private int maxPrint = 15;
     private int processID;
+    public ArrayList<Long> tester = new ArrayList<>();
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -38,15 +35,11 @@ public class Process{
         ioBurst = 0;
         processPriority = 0;
         processState = 0;
-        // run = true;
+        bSpec="";
         c = 'A';
         
         // numOfprint = 0; 
         processSite = new ArrayList<>();
-        // setMaxPrint();
-        // timeSpec.add(new BurstSpec(6,5,0));
-        // timeSpec.add(new BurstSpec(7,3,0));
-        // timeSpec.add(new BurstSpec(4,2,0));
 
     }
     public Process(int processID){
@@ -145,14 +138,16 @@ public class Process{
 
     public void setTerminationTime(long time){ // getting in the FCFS
         this.terminationTime = time;
+        System.out.println("Termination Time Set: "+ time);
     }
 
     public void upCpuBurst(long time){
-        this.cpuBurst+= time;
+        this.cpuBurst+= time;        
     }
 
     public void upIoBurst(long time){
         this.ioBurst+=time;
+        tester.add(time);
     }
 
     public void setPriority(int priority){
@@ -163,8 +158,10 @@ public class Process{
         this.processState = state;
     }
 
-    public void setTimeSpec(int cpu, int io, int device){        
-        this.timeSpec.add(new BurstSpec(cpu,io,device));
+    public void setTimeSpec(int cpu, int io, int device){   
+        BurstSpec b = new BurstSpec(cpu,io,device);     
+        this.timeSpec.add(b);
+        bSpec+=b.toString();
     }
 
     // private void setMaxPrint(){
@@ -184,14 +181,14 @@ public class Process{
 
     public void run(){
         fillArray();
-        print();
-        // upCpuBurst(2000);
+        // print();
+        
         // upNumOfPrint();
         // sleep();
     }
 
     public void ioRun(int d){
-        // System.out.println("I/O wait active! Decive-"+d);
+        
         System.out.printf("I/O wait active! Decive- %d Process- %d\n",d,processID);
         // upIoBurst();
         // sleep();
@@ -205,14 +202,19 @@ public class Process{
         }
     }
 
+    public String data(){
+        return String.format("Process: %d Creation: %d Arrival: %d,Termination: %d Priority: %d , State: %d, Arr: %s, BS: %s\n",processID, creationTime,arrivalTime,terminationTime,processPriority,processState,this.processSite,bSpec);
+    }
+
     private void print(){
         // System.out.printf("%c ",c);
-        System.out.println(this.processSite);
+        // System.out.printf("pID: %d, pStat: %d,   Arr: %s\n",processID, processState, this.processSite);
+        // this.toString();
     }
 
     @Override
     public String toString() {
-        return String.format("Process: %d, Arrival: %d, Priority: %d , State: %d\n",processID, arrivalTime,processPriority,processState);
+        return String.format("Process: %d, Creation: %d Arrival: %d,Termination: %d, Priority: %d , State: %d, Arr: %s, BS: %s\n",processID, creationTime,arrivalTime,terminationTime,processPriority,processState,this.processSite,this.timeSpec);
     }
 
     /*a private class to hold the CPU, I/O burst and 
@@ -221,11 +223,13 @@ public class Process{
         int cpuTime;
         int ioTime;
         int device;
+        String k;
 
         public BurstSpec(int c, int i, int d){
             this.cpuTime = c;
             this.ioTime = i;
             this.device = d;
+            k = String.format(" CP: %d, IO: %d, DN: %d --",cpuTime, ioTime, device);
         }
 
         /**
@@ -255,7 +259,8 @@ public class Process{
 
         @Override
         public String toString() {
-            return String.format("\nCP: %d, IO: %d, DN: %d\n",cpuTime, ioTime, device);
+            //return String.format("CP: %d, IO: %d, DN: %d",cpuTime, ioTime, device);
+            return k;
         }
     }
 }

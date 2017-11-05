@@ -10,15 +10,32 @@ import java.util.concurrent.TimeUnit;
 
 
 
-public class FCFS /*implements Runnable*/{
+public class NP_Priority {
 
     private static LinkedBlockingQueue<Process> list;    
     private ArrayList<Process> copyList; 
     // private ExecutorService thread;
+    private static Comparator<Process> sjfComparator = new Comparator<Process>(){
+        @Override
+        public int compare(Process p1,Process p2){
+            if(p1 == null) return -1;            
+            if(p2 == null) return 1;
+
+            int p1Prio = p1.getProcessPriority();
+            int p2Prio = p2.getProcessPriority();
+            long p1Arrive = p1.getArrivalTime();
+            long p2Arrive = p2.getArrivalTime();
+            
+            if(p1Prio != p2Prio){
+                return (p1Prio < p2Prio)? 1 : -1;
+            } 
+            return  (p1Arrive > p2Arrive)? 1 : -1;
+        }
+    };
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public FCFS(){
+    public NP_Priority(){
         list = new LinkedBlockingQueue<Process>();
         copyList = new ArrayList<Process>();
         // timeThread();
@@ -28,12 +45,12 @@ public class FCFS /*implements Runnable*/{
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     public static LinkedBlockingQueue<Process> getList(){
-        return FCFS.list;
+        return NP_Priority.list;
     }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public void setList(LinkedBlockingQueue<Process> l){        
-       FCFS.list = l;              
+        NP_Priority.list = l;              
     }
 
     public void makeCopy(Process p){
@@ -43,10 +60,6 @@ public class FCFS /*implements Runnable*/{
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    /*@Override
-    public void run(){
-        // numPrint1();
-    }*/
 
     // public void sleep(){
     //     try {
@@ -60,49 +73,51 @@ public class FCFS /*implements Runnable*/{
 	// 	long timeMillis = System.currentTimeMillis();
     //     long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);        
 	// 	return timeSeconds;
-	// }
+    // }
+
+    
+    
+    private Process sjfSorter(LinkedBlockingQueue<Process> list){        
+        Process process = Collections.max(NP_Priority.list,NP_Priority.sjfComparator);
+        // System.out.println("The Priority Min is <><><><><><><><><><><><>><><<<><><> "+Collections.min(NP_Priority.list,NP_Priority.sjfComparator));
+        list.remove(process);
+        return process;
+    }
 
     int i=0;
-    public void cpuProccess(){        
+    public void cpuProccess(){
+        
         Process p;
         while(true){
             if(list.size()!=0){
-                // System.out.println("FCFS LIST "+FCFS.list);
-                
-                p = list.poll();
+                // System.out.println("NP_Priority LIST \n"+list);
+                // p = list.poll();
+                p = sjfSorter(list);
+            
                 makeCopy(p);
                 // System.out.println("POLLED : "+p);
-                // for(int i=0;i<p.getTimeSpec().size();i++){ // sequence of instructions
-                    // System.out.println("CPU BURST HAPPENS" + p);
-                    p.setProcessState(2); // enters state 2 (running) before runnin
-                    
-                    p.upCpuBurst(-Utility.time());
-                    for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
-                        p.run(); // fills array
-                        Utility.sleep();
-                        // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
-                    }                    
-                    p.upCpuBurst(Utility.time());
-                    
-                    // System.out.println("IO BURST HAPPENS" + p);
-                    /* This loop deals when there is IO burst following the above CPU burst*/
-                    if(p.getTimeSpec().size() !=0 && p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
-                        // move this process into the Device queue
-                        // the device thread runs every second and it executes any IO from the queue's head
-                        p.setProcessState(3); // waiting state as it enters IO waiting queue.
-                        
-                        Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, FCFS.getList());
-                        // if(FCFS.getList().equals(d.getReturnQueue())){
 
-                        // }
-                        // System.out.println(d == null);
-                        // Device.setReturnQueue(FCFS.getList());
-                        d.deviceEnqueu(p);
-                    }else{
-                        if( p.getTimeSpec().size() != 0 && p.getTimeSpec().getFirst().getIoTime() == 0)
-                            p.getTimeSpec().removeFirst();
-                    }
-                //}
+                p.setProcessState(2); // enters state 2 (running) before running
+                p.upCpuBurst(-Utility.time());
+                for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
+                    p.run(); // fills array
+                    Utility.sleep();
+                    // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
+                }
+                p.upCpuBurst(Utility.time());
+                
+                // System.out.println("IO BURST HAPPENS" + p);
+                /* This loop deals when there is IO burst following the above CPU burst*/
+                if(p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
+                    // move this process into the Device queue
+                    // the device thread runs every second and it executes any IO from the queue's head
+                    p.setProcessState(3); // waiting state as it enters IO waiting queue.
+                    Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, NP_Priority.getList());
+                    // System.out.println(d == null);
+                    // Device.setReturnQueue(FCFS.getList());
+                    d.deviceEnqueu(p);
+                }
+                
                 i = 0;
             }else{
                 // System.exit(0);
@@ -111,7 +126,7 @@ public class FCFS /*implements Runnable*/{
                 i++;            
             }
             
-            if(i == 10){
+            if(i == 30){
                 break;
             }  
             // System.out.println("{}{}{}{}{}<><><> "+list);
@@ -120,8 +135,8 @@ public class FCFS /*implements Runnable*/{
         }
 
         calculate();
-        
     }
+
     private void calculate(){
         System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
         for (Process pr: copyList) {
