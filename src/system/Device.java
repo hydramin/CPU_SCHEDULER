@@ -72,17 +72,14 @@ public class Device implements Runnable{
             Utility.sleep();
             p.upIoBurst(Utility.time());
         }
-       
-        System.out.println("TimeSpec list is : "+ p.getTimeSpec());
-        p.getTimeSpec().removeFirst();        
-        System.out.println("TimeSpec isEmpty : "+ p.getTimeSpec().isEmpty());
-        System.out.println("TimeSpec list is : "+ p.getTimeSpec());
+
+        p.getTimeSpec().removeFirst();                
         
         if(!p.getTimeSpec().isEmpty()){
             p.setProcessState(1); // ready state when it goes back in ready queue
             Device.returnQueue.offer(p);
         }else{
-            System.out.println("****************************************************************");
+            
             p.setTerminationTime(Utility.time());
         }
             // FCFS.getList().offer(p);

@@ -166,13 +166,13 @@ public class Main{
     }
 
     private static void mlfq(){
-        // list = new LinkedBlockingQueue<>(); // the list to be passed around        
+        list = new LinkedBlockingQueue<>(); // the list to be passed around        
         
-        // Multilevel f = new Multilevel();
+        ML_Feedback f = new ML_Feedback(list);
         // f.setList(list);
-        // ProcessGen.generate();
-        // ProcessGen.addScheduleQueues(Multilevel.getList());
-        // f.cpuProccess();
+        ProcessGen.generate();
+        ProcessGen.addScheduleQueues(ML_Feedback.getList());
+        f.cpuProcess();
     }
 
 

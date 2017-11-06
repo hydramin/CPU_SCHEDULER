@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class ProcessGen implements Runnable{
 /* Genetates a random Process with random attributes*/    
     private static ProcessGen pr;
-    private static LinkedBlockingQueue<Process> queue;
+    // private static LinkedBlockingQueue<Process> queue;
     private static LinkedBlockingQueue<Process> jobQueue;
     private static int numOfProcAdded;
     public static ScheduledExecutorService pay;
