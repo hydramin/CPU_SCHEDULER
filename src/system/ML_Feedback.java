@@ -45,7 +45,7 @@ public class ML_Feedback{
                 swich = false;
             }else if(!rrQueue1.isEmpty()){
                 swich = true;
-                this.cpuProccessRR(swich, rrQueue1, 6, fcfsQueue, rrQueue1);
+                this.cpuProccessRR(swich, rrQueue1, 12, fcfsQueue, rrQueue1);
                 swich = false;
             }else if(!fcfsQueue.isEmpty()) {
                 swich = true;
@@ -59,6 +59,7 @@ public class ML_Feedback{
             }
             Utility.sleep();
         }
+        System.out.println("Finished work.");
         calculate();
     }
 
@@ -69,7 +70,7 @@ public class ML_Feedback{
             swich = false;
             if(!list.isEmpty()){
                 // System.out.println("RR_MLFQ LIST "+list);
-                System.out.println("RR_MLFQ ID "+runLimit);
+                System.out.println("RR_Queue ID "+runLimit);
                 p = list.poll();
                 makeCopy(p);
                 // System.out.println("POLLED : "+p);

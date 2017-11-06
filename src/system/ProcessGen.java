@@ -96,7 +96,7 @@ public class ProcessGen implements Runnable{
         ProcessGen.queueList.get(index).offer(p);
         numOfProcAdded++;
 
-        if(numOfProcAdded == 10){
+        if(numOfProcAdded == 5){
             ProcessGen.pay.shutdown();
             off();
             System.out.println("Is now Shut! "+ProcessGen.pay.isTerminated());
@@ -198,9 +198,4 @@ public class ProcessGen implements Runnable{
             e.printStackTrace();
         }        
     }
-
-    public static void main(String[] args) {
-        
-    }
-    
 }
