@@ -112,7 +112,55 @@ How the Main, FCFS, ProcessGen, Device, Process and Utility classes work togethe
 
     This is a branching point of the FCFS thread, which is under the Main.main() method's thread, and the newly created Device-0 thread. Once P1 is passed into Device-0 the device thread runs and the Device.ioService() method is called. This method takes the IO requirement specified by the P1 BurstSpec, which is 10, and runs the loop inside it 10 times with a 1 second sleep time similar to the FCFS.cpuProcess inner loop. IO time spent in the loop is recorded by P1.upIoBurst(-Utility.time()) for initial time and P1.upIoBurst(UItility.time()) for final time and their differenc is computed and stored in the ioBurst field of P1. The BurstSpec that contains (6,10,0) will be removed since both the CPU and IO requirements are met so it will be removed. P1 will be enqueued back into the returnQueue, which is the ready queue of the FCFS scheduler. 
 
-    While the Device-0 class is running FCFS runs in its own thread too. P1 is polled from the ready queue and passed into the Device-0 queue, when the while loop of the FCFS reiterates it will find P2 and carry out the CPU time requirement of P2 which is 6 seconds just like P1. Both P1 's IO wait and P2's CPU process are concurrent activities in different threads. In cases where P2 finishes its CPU time and P1 didn't finish its IO wait time P2 will be enqueued in Device-0 deviceQueue and IO times will be processed in a first-come-first-served manner. All processes return between the FCFS and Device classes until they are done and finally the process ends and system shuts down. 
+    While the Device-0 class is running FCFS runs in its own thread too. P1 is polled from the ready queue and passed into the Device-0 queue, when the while loop of the FCFS reiterates it will find P2 and carry out the CPU time requirement of P2 which is 6 seconds just like P1. Both P1 's IO wait and P2's CPU process are concurrent activities in different threads. In cases where P2 finishes its CPU time and P1 didn't finish its IO wait time P2 will be enqueued in Device-0 deviceQueue and IO times will be processed in a first-come-first-served manner. All processes return between the FCFS and Device classes until they are done and finally the process ends and system shuts down. At the end of the all processes the process detail is printed and the average waiting time and average turnaround time. 
+
+    Everytime a process is created and creation time is assigned, arrival time is assigned, temination time is assignen, a process runs in CPU, a process is in IO a Process.record() method is called inside the current process. The record() method creates a ProcessRecord class that encapsulates key information about the process and stores this ProcessRecord class inside an ArrayList. This ArrayList is used as an evidence of the process. 
+
+Calculation of Waiting time and Turnaround time
+    Waiting time is the time a process spends in CPU ready queue or IO device queue.
+    Turnaround time is the time a process takes from creation to end of execution.
+
+    Turnaround time for a single process is the termination time minus creation time. Therefore, turnaroundTime = P1.getTerminationTime() - P1.getCreationTime(). 
+
+    Waiting time for a single process is the turnaround time minus the cpu burst time. Thus, waitingTime = turnaroundTime - P1.getCpuBurst(). 
+
+    The average time is, simply adding all the turnaround and waiting times for a processes and dividing by the number of processes. The calculations are done in the FCFS.calculate() method. 
+
+**************************************************************************************
+
+All other scheduling algorithms implemented are a derivative of the FCFS algorithm. The main difference they have from the FCFS is the different way their cpuProcess() method is implemented. 
+
+1. Non-Premptive First Come First Served.
+2. Preemptive Round-Robin (RR) Scheduling
+3. Nonpreemptive Shortest-Job-First (SJF).
+4. Preemptive SJF (Shortest-Remaining-Time-First).
+5. Nonpreemptive Priority Scheduling.
+6. Preemptive Priority Scheduling
+7. Multilevel Queue Scheduling
+8. Multilevel Feedback Queue Scheduling
+
+2. Preemptive Round-Robin (RR) Scheduling
+    The Preemptive Round-Robin (refered to as RR)'s difference from the FCFS is that it has a certaint time-slice restiction. The time restriction is set in the RR.runLimit field. The runLimit is set to 2 int the RR constructor. The first process of the ready queue is taken, runs for 2 time-slices (2 seconds) and is preempted by the second process in the ready queue. If during the 2 time slices the first process finishes its work it goes into IO and come back to the end of the ready queue. Basically, every process runs for 2 time slices until they finish their task and the process ends. Finally, the calculate() method is called and it displays the calculated results. 
+
+3. Nonpreemptive Shortest-Job-First (SJF)
+    Similar to the FCFS, processes are generated and passed into the ready queue of the Non-Preemptive Shortest Job First (refered to as SJF) by the ProcessGen thread. Once processes are enqueued in the ready queue (list field). The idea behind this implementation is that the process with the shortest current CPU burst to take precedence. The first process enqueued will take the CPU (run in the cpuProcess() loop) until it leaves the CPU for IO. At this time, the sjfSorter(LinkedBlockingQueue<Process>) method is called and it uses a locally implemented Comparator interface with an overridden int compare(Process, Process) to sort out the process with the smallest current CPU time. If two processes have equal times then they will be compared by arrivalTime. What it means by 'current CPU time' is the Process may have several BurstSpec (CPU/IO specifications in order) and the Comparator will compare based on the first occuring BurstSpec. By using the sjfSorter(...) method a process is fetched from the ready queue and passed into the forloop of the cpuProcess() method. The rest of the process is similar to the FCFS.
+
+4. Preemptive SJF (Shortest-Remaining-Time-First).
+    The Preemptive SJF (refered to as pSJF) is a composition of the non preemptive SJF and the RR. The first process of the ready queue is processed for a certain time-slice (similar to the RR) and then a new process is chosen in a similar fashion to the non preemptive SJF by means of the sjfSorter() method. The time slice is set to enable the scheduling algorithm to check if there is any other process that has a smaller CPU run time than the current one. The newly chosen process is also given the same time slice and another session of checking for a short running process is done. This process iterates until all processes are done.
+
+5. Nonpreemptive Priority Scheduling.
+    The Nonpreemptive Priority Scheduling is the same as the SJF except that processes are compared not by shortest CPU run time but by the priority assigned to them when they are created in the ProcessGen thread. 
+
+
+6. Preemptive Priority Scheduling
+    The Preemptive Priority Scheduling is the same as the Preemptive SJF (Shortest-Remaining-Time-First) except that process are compared by priority. It has all the functionality of the Preemptive SJF.    
+
+7. Multilevel Queue Scheduling
+    The idea benid a Multilevel Queue Scheduling (refered to as MQS) is to have more than one queues that accept their own set of processes but the foreground queue of processes will have absolute priority over the background queue. To implement this, first the MQS has two queues the rrQueue (for the foreground round robin scheduler) and a fcfsQueue (for the FCFS background process schduler). These queus are passed into the ProcessGen thread and they are filled with process at random. For instance, out of 10 processes any random number of processes could go into either. As soon as the processes arrive in the rrQueue the RR class takes over and processes them until it exhausts all processes and will pass on control to the FCFS scheduler.
+
+
+
+
 
 
 

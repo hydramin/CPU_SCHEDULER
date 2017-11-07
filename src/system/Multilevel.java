@@ -18,9 +18,7 @@ public class Multilevel{
 
     public void cpuProcess(){
         roundRobin.setList(Multilevel.rrQueue);
-        roundRobin.cpuProccess();
-        System.out.println("Background FCFS started!");
-        System.out.println("Multilevel FCFS queue is : +++++++++++++++++++++++++++++++ \n"+Multilevel.fcfsQueue);
+        roundRobin.cpuProccess();        
        
         fcfServe.setList(Multilevel.fcfsQueue);
         fcfServe.cpuProccess();

@@ -59,13 +59,13 @@ public class NP_SJF {
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
-    public void sleep(){
-        try {
-            Thread.sleep(500L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    // public void sleep(){
+    //     try {
+    //         Thread.sleep(500L);
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     private Process sjfSorter(LinkedBlockingQueue<Process> list){                
         Process process = Collections.min(list,NP_SJF.sjfComparator);
