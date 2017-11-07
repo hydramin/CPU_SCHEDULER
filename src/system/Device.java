@@ -27,9 +27,9 @@ public class Device implements Runnable{
         timeThread();
     }
 
-    public static HashMap<Integer, Device> getCurrentDevices() {
-        return Device.currentDevices;
-    }
+    // public static HashMap<Integer, Device> getCurrentDevices() {
+    //     return Device.currentDevices;
+    // }
 
     public ExecutorService getExecutor(){
         return this.executorService;
@@ -43,35 +43,27 @@ public class Device implements Runnable{
         Device.returnQueue = returnQueue;
         return currentDevices.get(n);
     }
+   
 
-    /**
-     * @param returnQueue the returnQueue to set
-     */
-    // public static void setReturnQueue(LinkedBlockingQueue<Process> returnQueue) {
-    //     // System.out.println("RETURN QUEUE");
-    //     if(returnQueue == null)
-    //         Device.returnQueue = returnQueue;
-    // }
-
+    
+    public LinkedBlockingQueue<Process> getReturnQueue(){
+        return Device.returnQueue;
+    }
+    
     public void deviceEnqueu(Process p){   
         if(!deviceQueue.contains(p))     
             deviceQueue.offer(p);        
     }
 
-    public LinkedBlockingQueue<Process> getReturnQueue(){
-        return Device.returnQueue;
-    }
-
     private void ioService(){ // this service runs the ioPrint of the process
         
         Process p = deviceQueue.element();
+        p.upIoBurst(-Utility.time());
         for(int i = 0;i < p.getTimeSpec().getFirst().getIoTime();i++){
-            p.upIoBurst(-Utility.time());
-            p.ioRun(p.getTimeSpec().getFirst().getDevice());
-            // System.out.printf("DEVICE QUEUE: %s, BURST SPEC: %s", deviceQueue, p.getTimeSpec());
+            p.ioRun(p.getTimeSpec().getFirst().getDevice());            
             Utility.sleep();
-            p.upIoBurst(Utility.time());
         }
+        p.upIoBurst(Utility.time());
 
         p.getTimeSpec().removeFirst();                
         
@@ -82,8 +74,7 @@ public class Device implements Runnable{
             
             p.setTerminationTime(Utility.time());
         }
-            // FCFS.getList().offer(p);
-        // System.out.println("RETURN QUEUE RETURNED: "+list.hashCode());
+            
         deviceQueue.remove(p);
 
         if(deviceQueue.isEmpty()){}
@@ -91,7 +82,7 @@ public class Device implements Runnable{
     }
 
     @Override
-    public void run() {  
+    public void run() {          
         while(true){                
             if(this.deviceQueue.size()!=0){  
                 ioService();
@@ -100,15 +91,7 @@ public class Device implements Runnable{
         // System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
     }
 
-    // public void sleep(){
-    //     try {
-    //         Thread.sleep(800L);
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-    void timeThread() {    
+    private void timeThread() {    
         try{
             System.out.println("Device thread called.>>>>>>>>");                                                                                
             executorService.execute(this); 

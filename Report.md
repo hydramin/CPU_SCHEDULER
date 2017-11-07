@@ -50,5 +50,82 @@ FCFS
 FCFS implementation
     - The FCFS class contains a readyQueue named 'list'. This readyQueue is a static LinkedBlockingQueue<Process> to prevent the creation of several ready queues; that is, a FCFS scheduler should only contain one ready queue. 
 
-    - The heart of the FCFS is a method called the cpuProcess(). This method controls what gets processed, the number of time-slices(quanta) the process takes and, when required, passing the process into the IO queue into a particular IO device. 
+    - The heart of the FCFS is a method called the cpuProcess(). This method controls what gets processed and, when required, passing the process into the IO queue into a particular IO device. 
+
+    Fields of FCFS class:
+    private static LinkedblockingQueue<Process> list: it is the FCFS queue and the poll() function is used to take the foremost item from the queue and process it until the process requests for I/O service. When a process finishes its IO wait time it is returned enqueued back at the tail of this queue. 
+
+    private ArrayList<Process> copyList: this ArrayList stores a reference of all the processes that are processed in the FCFS. Because the above list loses all reference to all processes after they are processed. The copyList is used in the end to print out the process detail at the end of all processes.
+
+    Methods of FCFS class: 
+    Getter methods: they return a reference of the fields of the class.
+    Setter methods:
+        void setList() : it sets the reference of the list field.
+    Operation methods: 
+        void makeCopy() : it stores the reference of all unique processes passed into the class
+        void cpuProcess() : this method acts like the CPU of the system. It contains an infinite while loop that only breaks out when all the processes in the 'list' field is emptied of all processes. In one iteration, first the head process is polled and passed into a a for loop that iterates as many times as specified by the processe's first CPU time requirement. To slow down the loop so it is easier to observe the process, there is a Utility.sleep() method called from the Utility class that sleeps the thread running the FCFS class by one second. Outside of the for loop there are methods Process.upCpuBurst() that record the time spent by the CPU running the process. Once this loop is finished, there is an if statement that sets up the process for the IO queue. If the process requires an IO time this process is completely passed out of the FCFS into the Decive class by means of the Device constructor. The Device constructor also takes in the reference of the 'list' field so that when the IO wait time is done it can be returned back to the FCFS class. If the process doesn't have any IO requirement (i.e. the CPU/IO specification or BurstSpec has an IO of 0) the process is either enqueued back into the ready queue (list field) or if there are no specifications left the process is removed and terminated. There is an else statement that is used to specifies the waiting time of the system. What this means is is the CPU will wait for a process for the specified amount of time (in this case 10 sec) and if no process in enqueued in the ready queue (list field) the system shuts down and calls the FCFS.calculate() method. However, if there is another process the infinite while loop keeps on going until all processes are exhausted. 
+
+        void calculate() : this method calculates the average turnaround time and the average waiting time for all the processes in the ready queue of the FCFS class. It also prints all the details of the processes including the time the process is created, the time that there is a state change, the time when the processes was running, the time the process is in IO queue and so on. All this information is stored inside a ProcessRecord class.
+
+
+Device class
+    The Device class is implemented to serve as an IO service class. The Device class is a multiton class that creates a device with a specified id number only once. If the same device is requested again by another process the device reference is called from the multiton list of devices. One special feature of this class is that it runs on a separate thread than the CPU scheduling classes. For example if a processes in the FCFS class calls for device number 1, the Device class creates Device-1 or if Device-1 is already created gets Device-1 from the Device class's HashMap and have the process stay in the Device-1 queue (deviceQueue field) for as long as the process needs to stay. The fact that it runs on a separate thread from the scheduling classes allows the scheduler to move to the next process. This is a very imprtant feature of this implementation and so I will describe it in detail below.
+
+    For example, if the FCFS scheduler and the Device class run on the same thread then their execution is necessarily sequential. A CPU scheduler that waits for a process to finish IO then proceeds to the next process wastes valuable time of processing and will be inefficient. In this implementation when a process is passed into the Device class for its IO wait requirement, it is essentially non-existenet from the ready queue of the scheduler (FCFS) and most importantly the Device classes' process is a separate thread and doesn't make the FCFS processes to wait for the process. Therefore, the FCFS can proceed to the next process without waiting for the one passed into the Device class! When the process finishes its IO wait time, it goes back into the scheduler's ready queue. This implementation is very efficient in that it removes any CPU idling time by separating the CPU processes and IO processes!
+
+Device Implementation: 
+
+    Fields: 
+        deviceQueue: it is a LinkedBlockingQueue<Process> that stores all processes that use this particular device. Each device created has its own deviceQueue that store processes. This data structure allows for a first-come-first-serve processing of all processes. 
+
+        returnQueue: it is a static reference passed from the scheduleing class (i.e. FCFS class). It is used to return a process that finished its IO wait time if the process has remaining CPU processing. If a process has no CPU requirement time it is not returned into this queue. 
+
+        currentDevices: it is a HashMap<Integer, Device> that stores and integer key as the device id and a Device instance. Whenever an existing device is requested it is fetched out from this HashMap. If a new device is created it is stored in this map too.
+
+        executorService: it is an ExecutorService class that generates a new Device thread that is separate from the CPU scheduler's thread and the threads of all other Device threads. 
+
+    Methods: 
+        Device getDevice(int,Process,LinkedBlockingQueue<Process>) : this method takes in an int device id, a process and a return LinkedBlockingQueue of the scheduler and then constructs a new Device if the device id is not found in the currentDecvices HashMap. It then sets the returnQueue fied to the passed queue reference. Once the Device is retrieved, the reference of it is returned to the caller.
+
+        void  deviceEnqueue(Process) : this method is used to pass the reference of the process that requires IO into the specified device. to prevent redundunt reference passing it contains an if statement that blocks the parameter from being passed again it it already exists in the deviceQueue.
+
+        void ioService() : this is the heart of the the IO device. it makes the current process to wait in IO for the specified amount of time. It contains a for loop that counts for x amount of IO time with a temporary 1 second thread sleep. It also records the IO wait time for the process by the Process.upIoBurst(Long) method. Once the IO wait is done it removes the block of BurstSpec class that contains the IO time. The next block of code checks if there is any CPU/IO requirements (BurstSpec) left; if there is left then the process will be enqueued back into the ready queue of the scheduler and if it is not then the termination time of the process will be set and removed from the deviceQueue effectively losing the reference of the process. If the process is not enqueued back into the ready queue of the scheduler it will be lost or essentially terminated!
+
+        void run() : the run method is an overridden method of the Runnable interface the Device class implements. It runs the ioService() method inside an infinite while loop as long as the device queue isnot empty. 
+
+        void timeThread() : this method starts the Device instance's thread. The thread doesn't end because the while loop in the run() method prevents the thread from ending. This feature is important because once the device is started it will stay live as long as the system CPU is running. The device might be required again at some time in the future and thus with the device being live the scheduler can just call its reference and pass in the process that needs IO it this device. 
+
+How the Main, FCFS, ProcessGen, Device, Process and Utility classes work together:
+
+    Below I will explain how the 5 classes above work together to execute a process. The Main class starts the ProcessGen singleton class thread, the FCFS class and pass in a common LinkedBlockingQueue<Process> into both classes via the respective setter methods. The ProcessGen class runs concurrently along the FCFS class. The FCFS initially has no processes to schedule and so it waits for 10 seconds after startup. The ProcessGen class has the capability to generate new processes and pass them into the FCFS via the shared reference they both have.
+    
+    First let us make a process with predetermined CPU and IO time requirements:
+        P1: new BurstSpec(6,10,0),
+            new BurstSpec(7,3,0)
+
+        P2: new BurstSpec(6,10,0),
+            new BurstSpec(7,3,0) 
+
+    The Process P will store these time requirement specifications in the timeSpec LinkedList. The process will have its creationTime, arrivalTime, priority set by the ProcessGen jobProcessEnqueue() method. And the multiProcessEnqueu() method passes the process into the FCFS shared queue.
+
+    As soon as the FCFS class gets the process P1 passed into its queue it will start the cpuProcess(). The cpuProcess() method takes the CPU time from BurstSpec(6,10,0), which is 6, and runs the for loop 6 times. In between each iteration the Utility.sleep() method is called and a 1 second delay is effected to slow down the loop. The P1.upCpuBurst(-Utility.time()) and P1.upCpuBurst(Utility.time()) bouding the loop pass in the initial time and final time of the loop and the difference of the times is added as the CPU burst time in the cpuBurst field. Once the CPU time is processed P1 requires an IO time of 10 seconds. For this a Device class is constructed via the Device.getDevice(0, P1, readyQueue) and the device number in the BurstSpec- the third number, 0 - along with the current Process, P1 and a return address - i.e. the ready queue of FCFS - named 'list' - are passed. 
+
+    This is a branching point of the FCFS thread, which is under the Main.main() method's thread, and the newly created Device-0 thread. Once P1 is passed into Device-0 the device thread runs and the Device.ioService() method is called. This method takes the IO requirement specified by the P1 BurstSpec, which is 10, and runs the loop inside it 10 times with a 1 second sleep time similar to the FCFS.cpuProcess inner loop. IO time spent in the loop is recorded by P1.upIoBurst(-Utility.time()) for initial time and P1.upIoBurst(UItility.time()) for final time and their differenc is computed and stored in the ioBurst field of P1. The BurstSpec that contains (6,10,0) will be removed since both the CPU and IO requirements are met so it will be removed. P1 will be enqueued back into the returnQueue, which is the ready queue of the FCFS scheduler. 
+
+    While the Device-0 class is running FCFS runs in its own thread too. P1 is polled from the ready queue and passed into the Device-0 queue, when the while loop of the FCFS reiterates it will find P2 and carry out the CPU time requirement of P2 which is 6 seconds just like P1. Both P1 's IO wait and P2's CPU process are concurrent activities in different threads. In cases where P2 finishes its CPU time and P1 didn't finish its IO wait time P2 will be enqueued in Device-0 deviceQueue and IO times will be processed in a first-come-first-served manner. All processes return between the FCFS and Device classes until they are done and finally the process ends and system shuts down. 
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
 

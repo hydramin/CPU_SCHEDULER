@@ -2,12 +2,13 @@ package system;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.TreeMap;
 import java.util.Arrays;
 
 public class Process{
-    private long creationTime; // time the process is created
-    private long terminationTime; // termination time for the process    
-    private long arrivalTime; // The time when the FCFS      
+    private int creationTime; // time the process is created
+    private int terminationTime; // termination time for the process    
+    private int arrivalTime; // The time when the FCFS      
     private int cpuBurst; // time being processed on the cpu, 
                         // it starts from zero and any time the run is called it is incremented by one 
     private int ioBurst; // time the program waits for io
@@ -18,12 +19,12 @@ public class Process{
     private ArrayList<Character> processSite; // one process action is filling the array.
     private char c;
     
-    String bSpec;
+    String bSpec; // information holder for the process
     private LinkedList<BurstSpec> timeSpec = new LinkedList<>();
 
     // private int maxPrint = 15;
-    private int processID;
-    public ArrayList<Long> tester = new ArrayList<>();
+    private int processID;    
+    private ArrayList<ProcessRecord> myRecord;
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> CONSTRUCTOR
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -36,25 +37,30 @@ public class Process{
         processPriority = 0;
         processState = 0;
         bSpec="";
-        c = 'A';
-        
-        // numOfprint = 0; 
-        processSite = new ArrayList<>();
+        c = 'A'; 
+        processSite = new ArrayList<>();        
+        this.myRecord = new ArrayList<>();       
 
     }
     public Process(int processID){
         this();
-        this.processID = processID; // identifies the partifular process
+        this.processID = processID; // identifies the partifular process        
     }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
  
+    /**
+     * @return the myRecord
+     */
+    public ArrayList<ProcessRecord> getMyRecord() {
+        return myRecord;
+    }
 
     /**
      * @return the arrivalTime
      */
-    public long getArrivalTime() {
-        return arrivalTime;
+    public int getArrivalTime() {        
+        return arrivalTime;        
     }
 
     /**
@@ -85,13 +91,6 @@ public class Process{
         return processState;
     }
 
-    // /**
-    //  * @return the c
-    //  */
-    // public char getC() {
-    //     return c;
-    // }
-
     /**
      * @return the timeSpec
      */
@@ -99,63 +98,59 @@ public class Process{
         return timeSpec;
     }
 
-    // /**
-    //  * @return the numOfprint
-    //  */
-    // public int getNumOfprint() {
-    //     return numOfprint;
-    // }
-
-    // /**
-    //  * @return the maxPrint
-    //  */
-    // public int getMaxPrint() {
-    //     return maxPrint;
-    // }
-
     public ArrayList<Character> getProcessSite(){
         return this.processSite;
     }
 
-    public long getCreationTime(){
+    public int getCreationTime(){
         return this.creationTime;
     }
 
-    public long getTerminationTime(){
+    public int getTerminationTime(){
         return this.terminationTime;
+    }
+
+    /**
+     * @return the processID
+     */
+    public int getProcessID() {
+        return processID;
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     public void setCreationTime(long time){
-        this.creationTime = time;
+        this.creationTime = (int) time;
+        record();
     }
 
     public void setArrivalTime(long time){ // getting in the FCFS
-        this.arrivalTime = time;
+        this.arrivalTime = (int) time;
+        record();
     }
 
     public void setTerminationTime(long time){ // getting in the FCFS
-        this.terminationTime = time;
-        System.out.println("Termination Time Set: "+ time);
+        this.terminationTime = (int) time;
+        record();
     }
 
     public void upCpuBurst(long time){
-        this.cpuBurst+= time;        
+        this.cpuBurst+= (int) time;              
     }
 
     public void upIoBurst(long time){
-        this.ioBurst+=time;
-        tester.add(time);
+        this.ioBurst+= (int) time;        
     }
 
     public void setPriority(int priority){
         this.processPriority = priority;
+        record();
     }
 
     public void setProcessState(int state){
         this.processState = state;
+        record();
     }
 
     public void setTimeSpec(int cpu, int io, int device){   
@@ -164,58 +159,67 @@ public class Process{
         bSpec+=b.toString();
     }
 
-    // private void setMaxPrint(){
-        
-    //     for(int i = 0;i<this.timeSpec.size();i++){
-    //         this.maxPrint += this.timeSpec.get(i).getCpuTime();
-    //     }
-    // }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     public void fillArray(){
         //System.out.println("ArrayFilled!");
-        this.processSite.add(c++);
+        this.processSite.add(c++);        
     }
 
     public void run(){
         fillArray();
-        // print();
-        
-        // upNumOfPrint();
-        // sleep();
+        record();
+     
     }
 
     public void ioRun(int d){
         
-        System.out.printf("I/O wait active! Decive- %d Process- %d\n",d,processID);
-        // upIoBurst();
-        // sleep();
+        // System.out.printf("I/O wait active! Decive- %d Process- %d\n",d,processID);
+        record();
     }
-
-    public void sleep(){
-        try {
-            Thread.sleep(200L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     public String data(){
         return String.format("Process: %d Creation: %d Arrival: %d,Termination: %d Priority: %d , State: %d, Arr: %s, BS: %s\n",processID, creationTime,arrivalTime,terminationTime,processPriority,processState,this.processSite,bSpec);
     }
 
-    private void print(){
-        // System.out.printf("%c ",c);
-        // System.out.printf("pID: %d, pStat: %d,   Arr: %s\n",processID, processState, this.processSite);
-        // this.toString();
-    }
+    // private void print(){
+    //     // System.out.printf("%c ",c);
+    //     // System.out.printf("pID: %d, pStat: %d,   Arr: %s\n",processID, processState, this.processSite);
+    //     // this.toString();
+    // }
+
+    private void record(){
+	    ProcessRecord records = new ProcessRecord();
+
+	    records.setpID(this.getProcessID());
+        records.setCurrentTime(((int) Utility.time())-this.getCreationTime());        
+        records.setCreationTime(this.getCreationTime()- this.getCreationTime());
+        records.setArrivalTime(this.getArrivalTime() - this.getCreationTime());
+        if(this.getProcessState() == 4)
+            records.setTerminationTime(this.getTerminationTime() - this.getCreationTime());
+        records.setPriority(this.getProcessPriority());
+        records.setState(this.getProcessState());
+        records.setArrPrinted(this.processSite.toString());
+        // records.setBurstSpec(this.data());
+        records.setBurstSpec(String.format("%s",this.timeSpec));
+        // if(this.getCpuBurst() >= 0)
+        //     records.setCpuBurstTime(this.getCpuBurst());
+        // if(this.getIoBurst() >= 0)
+        //     records.setIoBurstTime(this.getIoBurst());
+
+        myRecord.add(records);
+    }   
 
     @Override
     public String toString() {
         return String.format("Process: %d, Creation: %d Arrival: %d,Termination: %d, Priority: %d , State: %d, Arr: %s, BS: %s\n",processID, creationTime,arrivalTime,terminationTime,processPriority,processState,this.processSite,this.timeSpec);
     }
+
+ 
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> BURSTSPEC CLASS
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
     /*a private class to hold the CPU, I/O burst and 
     device instructions for the Process*/

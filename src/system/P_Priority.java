@@ -143,16 +143,21 @@ public class P_Priority {
             }  
             // System.out.println("{}{}{}{}{}<><><> "+list);
     
-            sleep(); // context switch time
+            Utility.sleep(); // context switch time
         }
 
+        calculate();
+    }
+
+    private void calculate(){
         System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
         for (Process pr: copyList) {
             // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
             pr.setProcessState(4);
-            System.out.println(pr);
+            System.out.println(pr.data());
         }
         double avgCpuBurst = 0;
+        double avgIoBurst = 0;
         double avgWaiting=0;
         double turnaroundTime=0;
         Process temp;
@@ -160,11 +165,21 @@ public class P_Priority {
             temp = copyList.get(i);
             turnaroundTime += (temp.getTerminationTime() - temp.getCreationTime());
             avgCpuBurst+=(temp.getCpuBurst());
+            avgIoBurst+=(temp.getIoBurst());
         }
+        avgIoBurst = avgIoBurst/copyList.size();
         avgCpuBurst = avgCpuBurst/copyList.size();
         turnaroundTime = turnaroundTime/copyList.size();
         avgWaiting = turnaroundTime - avgCpuBurst;
-        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f\n",avgWaiting,turnaroundTime);
+        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
+        
+        System.out.println("\nTime   Record");
+        for (Process var : copyList) {
+            for (ProcessRecord r : var.getMyRecord()) {
+                System.out.printf("%s \n",r);                
+            }
+            System.out.println("********************************\n*******************************");
+        }
     }
 }
 

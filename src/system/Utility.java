@@ -26,11 +26,11 @@ public class Utility{
 		return timeSeconds;
     }
 
-    public static void stopDevices(){
-        System.out.println("Stop Devices!");
-        for (Integer i : Device.getCurrentDevices().keySet()) {
-            Device.getCurrentDevices().get(i).getExecutor().shutdown();
-        }
-    }
+    // public static void stopDevices(){
+    //     System.out.println("Stop Devices!");
+    //     for (Integer i : Device.getCurrentDevices().keySet()) {
+    //         Device.getCurrentDevices().get(i).getExecutor().shutdown();
+    //     }
+    // }
 
 }

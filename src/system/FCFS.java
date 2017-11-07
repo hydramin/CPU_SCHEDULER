@@ -13,8 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class FCFS /*implements Runnable*/{
 
     private static LinkedBlockingQueue<Process> list;    
-    private ArrayList<Process> copyList; 
-    // private ExecutorService thread;
+    private ArrayList<Process> copyList;     
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -23,7 +22,7 @@ public class FCFS /*implements Runnable*/{
         copyList = new ArrayList<Process>();
         // timeThread();
     }
-
+    
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
@@ -35,32 +34,15 @@ public class FCFS /*implements Runnable*/{
     public void setList(LinkedBlockingQueue<Process> l){        
        FCFS.list = l;              
     }
-
+    
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public void makeCopy(Process p){
         if(!copyList.contains(p))
             copyList.add(p);
     }
 
-    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
-    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    /*@Override
-    public void run(){
-        // numPrint1();
-    }*/
 
-    // public void sleep(){
-    //     try {
-    //         Thread.sleep(500L);
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-    // private static  long time() {
-	// 	long timeMillis = System.currentTimeMillis();
-    //     long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);        
-	// 	return timeSeconds;
-	// }
 
     int i=0;
     public void cpuProccess(){        
@@ -111,9 +93,9 @@ public class FCFS /*implements Runnable*/{
                 i++;            
             }
             
-            if(i == 10){
-                break;
-            }  
+            // if(i == 10){
+            //     break;
+            // }  
             // System.out.println("{}{}{}{}{}<><><> "+list);
     
             Utility.sleep();
@@ -147,7 +129,10 @@ public class FCFS /*implements Runnable*/{
         System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
         
         for (Process var : copyList) {
-            System.out.println(var.tester);
+            for (ProcessRecord r : var.getMyRecord()) {
+                System.out.printf("%s \n",r);                
+            }
+            System.out.println("********************************\n*******************************");
         }
     }
 }

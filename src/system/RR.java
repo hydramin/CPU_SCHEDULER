@@ -139,8 +139,12 @@ public class RR{
         avgWaiting = turnaroundTime - avgCpuBurst;
         System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
         
+        System.out.println("\nTime   Record");
         for (Process var : copyList) {
-            System.out.println(var.tester);
+            for (ProcessRecord r : var.getMyRecord()) {
+                System.out.printf("%s \n",r);                
+            }
+            System.out.println("********************************\n*******************************");
         }
     }
 

@@ -84,7 +84,7 @@ public class ProcessGen implements Runnable{
         //random number generator that randomly chooses an index from the queueList
         
         int index = (r(ProcessGen.queueList.size()) - 1);
-        System.out.println("<><><><><><><>Index<><><> "+index);      
+        // System.out.println("<><><><><><><>Index<><><> "+index);      
 
         Process p = ProcessGen.jobQueue.poll();        
 
@@ -96,7 +96,7 @@ public class ProcessGen implements Runnable{
         ProcessGen.queueList.get(index).offer(p);
         numOfProcAdded++;
 
-        if(numOfProcAdded == 5){
+        if(numOfProcAdded == 3){
             ProcessGen.pay.shutdown();
             off();
             System.out.println("Is now Shut! "+ProcessGen.pay.isTerminated());
@@ -105,7 +105,7 @@ public class ProcessGen implements Runnable{
 
     public static void off(){ // for device
         try {            
-            ProcessGen.pay.awaitTermination(5, TimeUnit.SECONDS);
+            ProcessGen.pay.awaitTermination(30, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -179,7 +179,7 @@ public class ProcessGen implements Runnable{
 
             if(Utility.time() % 4 == 0){      
                 // processEnqueu();
-                System.out.println("<><><>Job Queue Stat: "+jobQueue.isEmpty());   
+                // System.out.println("<><><>Job Queue Stat: "+jobQueue.isEmpty());   
                 if(!jobQueue.isEmpty())
                     multiProcessEnqueu();
                 // System.out.println("<><><><><><><><> CURRENT QUEUE "+this.queue);
