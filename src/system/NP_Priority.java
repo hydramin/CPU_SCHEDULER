@@ -14,22 +14,24 @@ public class NP_Priority {
 
     private static LinkedBlockingQueue<Process> list;    
     private ArrayList<Process> copyList; 
-    // private ExecutorService thread;
+    
+    /*This Comparator defiinition is the same as the SJF but it compares based on the 
+    process's priority as opposed to CPU burst time*/
     private static Comparator<Process> sjfComparator = new Comparator<Process>(){
         @Override
         public int compare(Process p1,Process p2){
             if(p1 == null) return -1;            
             if(p2 == null) return 1;
 
-            int p1Prio = p1.getProcessPriority();
+            int p1Prio = p1.getProcessPriority(); // save the process priority value
             int p2Prio = p2.getProcessPriority();
             long p1Arrive = p1.getArrivalTime();
             long p2Arrive = p2.getArrivalTime();
             
             if(p1Prio != p2Prio){
-                return (p1Prio < p2Prio)? 1 : -1;
+                return (p1Prio > p2Prio)? 1 : -1; // return the highest priority, 
             } 
-            return  (p1Arrive > p2Arrive)? 1 : -1;
+            return  (p1Arrive > p2Arrive)? 1 : -1; // return the highest arrival time
         }
     };
     
@@ -37,8 +39,7 @@ public class NP_Priority {
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
     public NP_Priority(){
         list = new LinkedBlockingQueue<Process>();
-        copyList = new ArrayList<Process>();
-        // timeThread();
+        copyList = new ArrayList<Process>();        
     }
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
@@ -60,26 +61,9 @@ public class NP_Priority {
 
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-
-    // public void sleep(){
-    //     try {
-    //         Thread.sleep(500L);
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-    // private static  long time() {
-	// 	long timeMillis = System.currentTimeMillis();
-    //     long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(timeMillis);        
-	// 	return timeSeconds;
-    // }
-
-    
     
     private Process sjfSorter(LinkedBlockingQueue<Process> list){        
-        Process process = Collections.max(NP_Priority.list,NP_Priority.sjfComparator);
-        // System.out.println("The Priority Min is <><><><><><><><><><><><>><><<<><><> "+Collections.min(NP_Priority.list,NP_Priority.sjfComparator));
+        Process process = Collections.min(NP_Priority.list,NP_Priority.sjfComparator); // choose the lowest priority based on the comparator      
         list.remove(process);
         return process;
     }
@@ -90,84 +74,38 @@ public class NP_Priority {
         Process p;
         while(true){
             if(list.size()!=0){
-                // System.out.println("NP_Priority LIST \n"+list);
-                // p = list.poll();
-                p = sjfSorter(list);
+                p = sjfSorter(list); // gets the min priority value
             
                 makeCopy(p);
-                // System.out.println("POLLED : "+p);
-
                 p.setProcessState(2); // enters state 2 (running) before running
                 p.upCpuBurst(-Utility.time());
                 for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
                     p.run(); // fills array
                     Utility.sleep();
-                    // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
                 }
                 p.upCpuBurst(Utility.time());
                 
-                // System.out.println("IO BURST HAPPENS" + p);
+                
                 /* This loop deals when there is IO burst following the above CPU burst*/
                 if(p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
                     // move this process into the Device queue
                     // the device thread runs every second and it executes any IO from the queue's head
                     p.setProcessState(3); // waiting state as it enters IO waiting queue.
-                    Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, NP_Priority.getList());
-                    // System.out.println(d == null);
-                    // Device.setReturnQueue(FCFS.getList());
+                    Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, NP_Priority.getList());                                      
                     d.deviceEnqueu(p);
                 }
                 
                 i = 0;
-            }else{
-                // System.exit(0);
-                // break;     
-                // System.out.println("==>"+i); 
+            }else{ 
                 i++;            
             }
             
-            if(i == 30){
+            if(i == 10){
                 break;
             }  
-            // System.out.println("{}{}{}{}{}<><><> "+list);
-    
             Utility.sleep();
         }
-
-        calculate();
-    }
-
-    private void calculate(){
-        System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
-        for (Process pr: copyList) {
-            // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
-            pr.setProcessState(4);
-            System.out.println(pr.data());
-        }
-        double avgCpuBurst = 0;
-        double avgIoBurst = 0;
-        double avgWaiting=0;
-        double turnaroundTime=0;
-        Process temp;
-        for(int i = 0; i<copyList.size();i++){
-            temp = copyList.get(i);
-            turnaroundTime += (temp.getTerminationTime() - temp.getCreationTime());
-            avgCpuBurst+=(temp.getCpuBurst());
-            avgIoBurst+=(temp.getIoBurst());
-        }
-        avgIoBurst = avgIoBurst/copyList.size();
-        avgCpuBurst = avgCpuBurst/copyList.size();
-        turnaroundTime = turnaroundTime/copyList.size();
-        avgWaiting = turnaroundTime - avgCpuBurst;
-        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
-        
-        System.out.println("\nTime   Record");
-        for (Process var : copyList) {
-            for (ProcessRecord r : var.getMyRecord()) {
-                System.out.printf("%s \n",r);                
-            }
-            System.out.println("********************************\n*******************************");
-        }
+        Utility.calculate(copyList); 
     }
 }
 

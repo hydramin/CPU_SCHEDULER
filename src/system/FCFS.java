@@ -10,33 +10,50 @@ import java.util.concurrent.TimeUnit;
 
 
 
-public class FCFS /*implements Runnable*/{
-
-    private static LinkedBlockingQueue<Process> list;    
-    private ArrayList<Process> copyList;     
+public class FCFS{
+    private static LinkedBlockingQueue<Process> list;  // the ready queue , processes are removed once they are done 
+    private ArrayList<Process> copyList;     // a copy of the Processes in the ready queue, for reserve
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATION
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    /**
+     * Constructor for First-Come-First-Serve scheduler.  
+     */
     public FCFS(){
         list = new LinkedBlockingQueue<Process>();
-        copyList = new ArrayList<Process>();
-        // timeThread();
+        copyList = new ArrayList<Process>();        
     }
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> GETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
+    /**
+     * Getter of the ready queue, runs O(1)
+     * @return the ready queue
+     */
     public static LinkedBlockingQueue<Process> getList(){
         return FCFS.list;
     }
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> SETTERS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    /**
+     * Setter of the ready queue,  runs O(1) 
+     * @pre parameter must not be null
+     * @post assigns the argument as the ready queue reference
+     * @return void
+     */
     public void setList(LinkedBlockingQueue<Process> l){        
        FCFS.list = l;              
     }
     
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><> OPERATIONS
     // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    /**
+     * Method that stores a unique reference of all Process classes  runs O(n)
+     * @pre arugument must not be null
+     * @post saves a reference of the argument in the arraylist copyList
+     * @return void
+     */
     public void makeCopy(Process p){
         if(!copyList.contains(p))
             copyList.add(p);
@@ -44,96 +61,54 @@ public class FCFS /*implements Runnable*/{
 
 
 
-    int i=0;
+    int i=0; // the shutdown-scheduler wait time counter is started 
+    /**
+     * Setter of the ready queue, runs O(n^2)
+     * @pre ready queue must not be null
+     * @post it executes the process based on the CPU/IO specifications in the process
+     * @return void
+     */
     public void cpuProccess(){        
-        Process p;
-        while(true){
-            if(list.size()!=0){
-                // System.out.println("FCFS LIST "+FCFS.list);
+        Process p;                  // temporary Process, holds the polled first element of the ready queue
+        while(true){ // infinite loop of the process
+            if(list.size()!=0){ // loop continues until ready queue is empty
+                p = list.poll(); // first element of ready queue
+                makeCopy(p);    // the reference of the process is saved
+                p.setProcessState(2); // process enters state 2 (running) before running
                 
-                p = list.poll();
-                makeCopy(p);
-                // System.out.println("POLLED : "+p);
-                // for(int i=0;i<p.getTimeSpec().size();i++){ // sequence of instructions
-                    // System.out.println("CPU BURST HAPPENS" + p);
-                    p.setProcessState(2); // enters state 2 (running) before runnin
-                    
-                    p.upCpuBurst(-Utility.time());
-                    for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){
-                        p.run(); // fills array
-                        Utility.sleep();
-                        // System.out.printf("This is CPU time: ",p.getTimeSpec()[i].getCpuTime());
-                    }                    
-                    p.upCpuBurst(Utility.time());
-                    
-                    // System.out.println("IO BURST HAPPENS" + p);
-                    /* This loop deals when there is IO burst following the above CPU burst*/
-                    if(p.getTimeSpec().size() !=0 && p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
-                        // move this process into the Device queue
-                        // the device thread runs every second and it executes any IO from the queue's head
-                        p.setProcessState(3); // waiting state as it enters IO waiting queue.
-                        
-                        Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, FCFS.getList());
-                        // if(FCFS.getList().equals(d.getReturnQueue())){
-
-                        // }
-                        // System.out.println(d == null);
-                        // Device.setReturnQueue(FCFS.getList());
-                        d.deviceEnqueu(p);
-                    }else{
-                        if( p.getTimeSpec().size() != 0 && p.getTimeSpec().getFirst().getIoTime() == 0)
-                            p.getTimeSpec().removeFirst();
+                p.upCpuBurst(-Utility.time()); // time before entering the CPU, subtracted
+                for(int j = 0; j<p.getTimeSpec().getFirst().getCpuTime();j++){ // get the specified CPU run time and loop that many times
+                    p.run(); // call the run() function that fills the ArrayList<Character>
+                    Utility.sleep();        // Sleep for a second to slow down the process
+                }                    
+                p.upCpuBurst(Utility.time());   // time after entering CPU, added; thus gives the change in time
+                
+                /* Below, is an if statement that checks if IO requirement is specified*/
+                if(p.getTimeSpec().size() !=0 && p.getTimeSpec().getFirst().getIoTime() != 0){ // if there is an IO burst following CPU burst
+                    // move this process into the Device queue
+                    // the device thread runs every second and it holds the Process for the alloted IO time
+                    p.setProcessState(3); // waiting state (3 - IO wait) as it enters IO waiting queue.                    
+                    // The Device multiton is created with Device number, the Process and the return Ready queue
+                    Device d = Device.getDevice(p.getTimeSpec().getFirst().getDevice(), p, FCFS.getList());                                        
+                    /* This method is used if the device is already created and the getDevice arguments
+                       dont change the current list and process passed*/
+                    d.deviceEnqueu(p); 
+                }else{ // if divice doesn't need to be used, the current BurstSpec (specification) is removed
+                    if( p.getTimeSpec().size() != 0 && p.getTimeSpec().getFirst().getIoTime() == 0){
+                        p.getTimeSpec().removeFirst(); // the first CPU/IO specification is removed
+                        list.offer(p); // The process is enqueued to the tail of the ready queue
                     }
-                //}
-                i = 0;
+                }                          
+                i = 0; // the shutdown-scheduler wait time counter is reset to 0
             }else{
-                // System.exit(0);
-                // break;     
-                // System.out.println("==>"+i); 
-                i++;            
+                i++; // if the ready queue is empty shutdown counter is incremented by 1
+                if(i == 10){ // if the counter reaches 10, infinite loop breaks out and ends the scheduler
+                    break;
+                }            
             }
-            
-            // if(i == 10){
-            //     break;
-            // }  
-            // System.out.println("{}{}{}{}{}<><><> "+list);
-    
-            Utility.sleep();
+            Utility.sleep(); // this represents the Context-Switch time, runs O(1)
         }
-
-        calculate();
-        
-    }
-    private void calculate(){
-        System.out.println("\n\n\nBEHOLD, BEHOLD, BEHOLD\n");
-        for (Process pr: copyList) {
-            // System.out.printf("Process %c IO ==> %d \n CPU ==> %d\n",pr.chr ,pr.getIoBurst(), pr.getCpuBurst());
-            pr.setProcessState(4);
-            System.out.println(pr.data());
-        }
-        double avgCpuBurst = 0;
-        double avgIoBurst = 0;
-        double avgWaiting=0;
-        double turnaroundTime=0;
-        Process temp;
-        for(int i = 0; i<copyList.size();i++){
-            temp = copyList.get(i);
-            turnaroundTime += (temp.getTerminationTime() - temp.getCreationTime());
-            avgCpuBurst+=(temp.getCpuBurst());
-            avgIoBurst+=(temp.getIoBurst());
-        }
-        avgIoBurst = avgIoBurst/copyList.size();
-        avgCpuBurst = avgCpuBurst/copyList.size();
-        turnaroundTime = turnaroundTime/copyList.size();
-        avgWaiting = turnaroundTime - avgCpuBurst;
-        System.out.printf("Avg Waiting: %.2f \nAvg Turnaround: %.2f \nAvg Avg CPU: %.2f \nAvg Avg IO: %.2f\n",avgWaiting,turnaroundTime, avgCpuBurst,avgIoBurst);
-        
-        for (Process var : copyList) {
-            for (ProcessRecord r : var.getMyRecord()) {
-                System.out.printf("%s \n",r);                
-            }
-            System.out.println("********************************\n*******************************");
-        }
+        Utility.calculate(copyList); // When the FCFS process ends, a summary is printed, runs O(n) 
     }
 }
 

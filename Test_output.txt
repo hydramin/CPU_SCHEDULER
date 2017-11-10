@@ -1,0 +1,1910 @@
+PID: 1 
+Cur Time: 0 
+Creation: 0 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 1 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 2 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 3 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 4 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 5 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 6 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 2 --,  CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 19 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 20 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 21 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 22 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 23 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 24 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 25 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 26 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 27 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 28 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 29 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 5, IO: 6, DN: 2 --,  CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 58 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 59 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 60 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 61 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 62 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 63 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 64 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 65 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 66 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 67 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 68 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 8, IO: 3, DN: 1 --]
+
+PID: 1 
+Cur Time: 69 
+Creation: 0 
+Arrival: 1 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: []
+
+PID: 2 
+Cur Time: 1 
+Creation: 1 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 1 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 6 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 7 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 8 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 9 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 10 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 11 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 12 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 13 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 14 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 4, DN: 3 --,  CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 32 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 33 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 34 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 35 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 36 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 37 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 38 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 39 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 74 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 75 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 76 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 77 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 78 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 79 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 80 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 81 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 82 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R] 
+Burst Specifics: [ CP: 7, IO: 2, DN: 3 --]
+
+PID: 2 
+Cur Time: 83 
+Creation: 1 
+Arrival: 1 
+Termination: 0 
+Priority: 4 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R] 
+Burst Specifics: []
+
+PID: 3 
+Cur Time: 1 
+Creation: 1 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 5 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 12 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 13 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 14 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 15 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 16 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 17 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 18 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 19 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 6, IO: 2, DN: 1 --,  CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 47 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 48 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 49 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 52 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 53 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 85 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 86 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 87 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 88 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 89 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 90 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 91 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 92 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 93 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 94 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 95 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 96 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: [ CP: 8, IO: 4, DN: 1 --]
+
+PID: 3 
+Cur Time: 97 
+Creation: 1 
+Arrival: 5 
+Termination: 0 
+Priority: 2 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q] 
+Burst Specifics: []
+
+PID: 4 
+Cur Time: 3 
+Creation: 3 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 2, IO: 1, DN: 1 --,  CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 9 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 2, IO: 1, DN: 1 --,  CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 25 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 2, IO: 1, DN: 1 --,  CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 26 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 2, IO: 1, DN: 1 --,  CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 27 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 2, IO: 1, DN: 1 --,  CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 53 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 54 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 55 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 56 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 57 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 58 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 59 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 4, IO: 3, DN: 1 --,  CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 100 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 101 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 102 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 103 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 104 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 105 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 106 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 108 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 109 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 110 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 3, DN: 2 --]
+
+PID: 4 
+Cur Time: 111 
+Creation: 3 
+Arrival: 9 
+Termination: 0 
+Priority: 3 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: []
+
+PID: 5 
+Cur Time: 5 
+Creation: 5 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 13 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 28 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 29 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 30 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 31 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 32 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 3, IO: 2, DN: 3 --,  CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 67 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 68 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 69 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 70 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 71 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 72 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 73 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 74 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 75 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 76 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 77 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 78 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 6, DN: 3 --,  CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 108 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 109 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 110 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 112 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 113 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 114 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 115 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 116 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: [ CP: 7, IO: 1, DN: 1 --]
+
+PID: 5 
+Cur Time: 117 
+Creation: 5 
+Arrival: 13 
+Termination: 0 
+Priority: 7 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P] 
+Burst Specifics: []
+
+PID: 6 
+Cur Time: 7 
+Creation: 7 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 17 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 39 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 40 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 41 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 42 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 43 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 44 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 45 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 46 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 47 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 48 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 49 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 50 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 51 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 7, IO: 6, DN: 3 --,  CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 82 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 83 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 84 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 85 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 86 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 87 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 88 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 2, IO: 5, DN: 2 --,  CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 117 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 118 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 1, IO: 1, DN: 1 --]
+
+PID: 6 
+Cur Time: 119 
+Creation: 7 
+Arrival: 17 
+Termination: 0 
+Priority: 9 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: []
+
+PID: 7 
+Cur Time: 9 
+Creation: 9 
+Arrival: 0 
+Termination: 0 
+Priority: 0 
+State: New 
+Print Activity: [] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 25 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Ready 
+Print Activity: [] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 51 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 52 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 53 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 54 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 55 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 56 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A] 
+Burst Specifics: [ CP: 1, IO: 5, DN: 2 --,  CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 94 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 95 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 96 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 97 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 98 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 99 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 100 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 101 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F] 
+Burst Specifics: [ CP: 5, IO: 3, DN: 3 --,  CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 119 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 120 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 121 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 122 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 123 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 124 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: Running 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 126 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 127 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 128 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 129 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 130 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: [ CP: 6, IO: 5, DN: 1 --]
+
+PID: 7 
+Cur Time: 131 
+Creation: 9 
+Arrival: 25 
+Termination: 0 
+Priority: 6 
+State: IO wait 
+Print Activity: [A, B, C, D, E, F, G, H, I, J, K, L] 
+Burst Specifics: []
+

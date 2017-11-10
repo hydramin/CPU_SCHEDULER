@@ -148,85 +148,24 @@ public class Main{
 
     private static void mlq(){
         list = new LinkedBlockingQueue<>(); // the list to be passed around        
-        list1 = new LinkedBlockingQueue<>(); // the list to be passed around        
-                
-        // ProcessGen.addScheduleQueues(list1);
-        // ProcessGen.addScheduleQueues(list);
+        list1 = new LinkedBlockingQueue<>(); // the list to be passed around 
         Multilevel m = new Multilevel(list, list1);
-        // ProcessGen.generate(Multilevel.getRrQueue(), Multilevel.getFcfsQueue());
         ProcessGen.generate();
-        ProcessGen.addScheduleQueues(Multilevel.getRrQueue());
-        ProcessGen.addScheduleQueues(Multilevel.getFcfsQueue());
+        ProcessGen.addScheduleQueues(Multilevel.getRRQueue());
+        ProcessGen.addScheduleQueues(Multilevel.getFCFSQueue());
         m.cpuProcess();
-        // Multilevel f = new Multilevel();
-        // f.setList(list);
-        // ProcessGen.generate();
-        // ProcessGen.addScheduleQueues(Multilevel.getList());
-        // f.cpuProccess();
     }
 
     private static void mlfq(){
-        list = new LinkedBlockingQueue<>(); // the list to be passed around        
-        
+        list = new LinkedBlockingQueue<>(); // the list to be passed around 
         ML_Feedback f = new ML_Feedback(list);
-        // f.setList(list);
         ProcessGen.generate();
         ProcessGen.addScheduleQueues(ML_Feedback.getList());
         f.cpuProcess();
     }
 
-
     public static void main(String[] args) {   
-        firstPage();  
-        
-            
-        // LinkedBlockingQueue<Process> list = new LinkedBlockingQueue<>(); // the list to be passed around
-        // LinkedBlockingQueue<Process> list1 = new LinkedBlockingQueue<>(); // the list to be passed around
-        
-
-        // System.out.println("list size "+list.size());
-        
-        // RR f = new RR();
-        // NP_SJF f = new NP_SJF();
-        // P_SJF f = new P_SJF();
-        // NP_Priority f = new NP_Priority();
-        // P_Priority f = new P_Priority();
-
-        // Multilevel m = new Multilevel(list, list1);
-        // ProcessGen.generate();
-        // ProcessGen.addScheduleQueues(list);
-        // ProcessGen.addScheduleQueues(list1);
-        // m.cpuProcess();
-        
-        
-        // System.out.println("RR created");
-        // f.setList(list);
-        // ProcessGen.generate();
-        // ProcessGen.generate();
-        // ProcessGen.addScheduleQueues(FCFS.getList());
-        // ProcessGen.addScheduleQueues(NP_SJF.getList());
-        // ProcessGen.addScheduleQueues(P_SJF.getList());
-        // ProcessGen.addScheduleQueues(NP_Priority.getList());
-        // ProcessGen.addScheduleQueues(P_Priority.getList());        
-        // ProcessGen.addScheduleQueues(RR.getList());
-       
-        // f.cpuProccess();        
-        System.out.println("Die Fool! ");
-        // System.exit(0);
-        // closeThreads();
-        // Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        
-        // for (Thread var : threadSet) {
-        //     System.out.println("laskdjf;laks");
-        //     var.stop();
-        // }
-        
-
-        //====================================================================
-        //====================================================================
-        //====================================================================
-        
-        
-        
+        firstPage();         
+        System.out.println("Die Fool! ");         
     }
 }
